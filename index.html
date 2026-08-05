@@ -22,54 +22,84 @@
   </nav>
 </div>
 
-<header class="hero">
+<header class="hero" id="demo">
   <div class="wrap">
     <span class="eyebrow">Chrome &amp; Brave extension</span>
     <h1>A study timer that <em>actually</em> locks you in.</h1>
     <p class="subhead">Set a session, and StudyLock blocks the sites that pull you away — YouTube, Instagram, TikTok, whatever you choose — until the timer runs out.</p>
     <div class="hero-ctas">
-      <a href="#demo" class="btn btn-primary">Add to Browser — Free</a>
-      <a href="#demo" class="btn btn-ghost">See it in action ↓</a>
+      <a href="index.html#demo" class="btn btn-primary">Add to Browser — Free</a>
+      <a href="#why" class="btn btn-ghost">Why it's different ↓</a>
     </div>
     <p class="hero-note">No account. No tracking. Runs entirely on your device.</p>
   </div>
 </header>
 
-<section class="demo-section" id="demo">
+<section class="compare-section" id="why">
   <div class="wrap">
-    <div class="browser-mock">
-      <div class="browser-chrome">
-        <div class="dots"><span></span><span></span><span></span></div>
-        <div class="tab-bar">
-          <div class="tab active">youtube.com</div>
-          <div class="tab">docs</div>
-        </div>
+    <div class="compare-intro reveal">
+      <span class="eyebrow">Why StudyLock</span>
+      <h2>Most tools do one part of this. Almost none do all three.</h2>
+      <p>Timers, task lists, and site blockers usually ship as separate apps that don't talk to each other. Here's what that actually costs you — and what changes when they're one thing.</p>
+    </div>
+
+    <div class="compare-grid">
+      <div class="compare-sticky reveal">
+        <span class="eyebrow">The comparison</span>
+        <h3>What most focus tools get wrong.</h3>
+        <p>Scroll through — each one is a small gap that adds up to you closing the app within a week.</p>
       </div>
-      <div class="browser-body" id="browserBody">
-        <div class="site-content">
-          <h3>Recommended for you</h3>
-          <p>youtube.com</p>
-          <div class="thumb-grid">
-            <div class="thumb"></div><div class="thumb"></div><div class="thumb"></div>
-            <div class="thumb"></div><div class="thumb"></div><div class="thumb"></div>
+
+      <div class="compare-rows">
+        <div class="compare-row reveal">
+          <div class="compare-col others">
+            <span class="tag">✕ Most blockers</span>
+            <p>Block sites, but have no idea what you're supposed to be working on instead.</p>
+          </div>
+          <div class="compare-col ours">
+            <span class="tag">◆ StudyLock</span>
+            <p>Bundles a task list into the same popup — you set your work and your lock in one motion.</p>
           </div>
         </div>
-        <div class="lock-overlay">
-          <div class="lock-icon">◆</div>
-          <h4>Locked in</h4>
-          <p>This site is blocked while your session is active.</p>
+
+        <div class="compare-row reveal">
+          <div class="compare-col others">
+            <span class="tag">✕ Most timers</span>
+            <p>Count down quietly in a tab. Nothing stops you from opening a new one and scrolling anyway.</p>
+          </div>
+          <div class="compare-col ours">
+            <span class="tag">◆ StudyLock</span>
+            <p>Actually redirects blocked sites at the browser level — the tab loads, then goes nowhere.</p>
+          </div>
         </div>
-      </div>
-      <div class="demo-controls">
-        <span class="demo-timer hidden" id="demoTimer">24:58</span>
-        <span></span>
-        <button class="btn btn-primary" id="demoToggle">Start session</button>
+
+        <div class="compare-row reveal">
+          <div class="compare-col others">
+            <span class="tag">✕ Most focus apps</span>
+            <p>Want an account, sync your activity to a server, sometimes sell that data on.</p>
+          </div>
+          <div class="compare-col ours">
+            <span class="tag">◆ StudyLock</span>
+            <p>No login, no server. Your sessions and tasks stay stored locally, on your device only.</p>
+          </div>
+        </div>
+
+        <div class="compare-row reveal">
+          <div class="compare-col others">
+            <span class="tag">✕ Most extensions</span>
+            <p>Bury the one setting you want under menus, or ask for permissions that don't add up.</p>
+          </div>
+          <div class="compare-col ours">
+            <span class="tag">◆ StudyLock</span>
+            <p>Three things, done well: a timer, a task list, a lock. Nothing else competing for your attention.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="features" id="features">
+<section class="features reveal" id="features">
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">What's inside</span>
@@ -96,7 +126,7 @@
   </div>
 </section>
 
-<section class="steps" id="how">
+<section class="steps reveal" id="how">
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">How it works</span>
@@ -123,7 +153,7 @@
 </section>
 
 <div class="wrap">
-  <div class="cta-band">
+  <div class="cta-band reveal">
     <h2>Your next study session starts in one click.</h2>
     <p>Free, local, and ready in under a minute.</p>
     <a href="#demo" class="btn btn-primary">Add to Browser — Free</a>
@@ -138,41 +168,21 @@
 </div>
 
 <script>
-  const demoToggle = document.getElementById('demoToggle');
-  const browserBody = document.getElementById('browserBody');
-  const demoTimer = document.getElementById('demoTimer');
-  let interval = null;
-  let seconds = 25 * 60;
-
-  function formatTime(s) {
-    const m = Math.floor(s / 60).toString().padStart(2, '0');
-    const sec = (s % 60).toString().padStart(2, '0');
-    return `${m}:${sec}`;
-  }
-
-  demoToggle.addEventListener('click', () => {
-    const isLocked = browserBody.classList.toggle('locked');
-    if (isLocked) {
-      demoToggle.textContent = 'End session';
-      demoTimer.classList.remove('hidden');
-      seconds = 25 * 60;
-      demoTimer.textContent = formatTime(seconds);
-      interval = setInterval(() => {
-        seconds -= 1;
-        demoTimer.textContent = formatTime(seconds);
-        if (seconds <= 0) {
-          clearInterval(interval);
-          browserBody.classList.remove('locked');
-          demoToggle.textContent = 'Start session';
-          demoTimer.classList.add('hidden');
-        }
-      }, 1000);
-    } else {
-      demoToggle.textContent = 'Start session';
-      demoTimer.classList.add('hidden');
-      clearInterval(interval);
-    }
+  // Stagger the four comparison rows so they don't all fade in at once
+  document.querySelectorAll('.compare-row.reveal').forEach((row, i) => {
+    row.style.transitionDelay = (i * 110) + 'ms';
   });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 </script>
 
 </body>

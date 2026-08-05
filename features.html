@@ -163,7 +163,22 @@
     ring.classList.add('pulse');
   }
 
-  // ---- Timer demo ----
+  // Fires fn once, the first time stage scrolls into view — never again after.
+  function playOnceInView(stage, fn) {
+    let played = false;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !played) {
+          played = true;
+          fn();
+          io.unobserve(stage);
+        }
+      });
+    }, { threshold: 0.45 });
+    io.observe(stage);
+  }
+
+  // ---- Timer demo (single pass) ----
   async function runTimerDemo() {
     const stage = document.getElementById('timerStage');
     const cursor = document.getElementById('timerCursor');
@@ -174,38 +189,31 @@
     const display = document.getElementById('timerDisplayMini');
 
     placeCursor(cursor, 300, 40);
-    while (true) {
-      await sleep(1000);
-      const c1 = await moveTo(cursor, preset45, stage);
-      ringAt(ring, c1.x, c1.y);
-      presets.forEach((b) => b.classList.remove('active'));
-      preset45.classList.add('active');
-      display.textContent = '45:00';
-      await sleep(500);
+    await sleep(600);
+    const c1 = await moveTo(cursor, preset45, stage);
+    ringAt(ring, c1.x, c1.y);
+    presets.forEach((b) => b.classList.remove('active'));
+    preset45.classList.add('active');
+    display.textContent = '45:00';
+    await sleep(500);
 
-      const c2 = await moveTo(cursor, startBtn, stage);
-      ringAt(ring, c2.x, c2.y);
-      startBtn.classList.add('btn-pressed');
-      await sleep(180);
-      startBtn.classList.remove('btn-pressed');
-      startBtn.textContent = 'Session active';
+    const c2 = await moveTo(cursor, startBtn, stage);
+    ringAt(ring, c2.x, c2.y);
+    startBtn.classList.add('btn-pressed');
+    await sleep(180);
+    startBtn.classList.remove('btn-pressed');
+    startBtn.textContent = 'Session active';
 
-      const ticks = ['44:59', '44:58', '44:57', '44:56'];
-      for (const t of ticks) {
-        await sleep(280);
-        display.textContent = t;
-      }
-      await sleep(900);
-
-      startBtn.textContent = 'Start session';
-      presets.forEach((b) => b.classList.remove('active'));
-      document.querySelector('#timerStage [data-m="25"]').classList.add('active');
-      display.textContent = '25:00';
-      await sleep(900);
+    const ticks = ['44:59', '44:58', '44:57', '44:56'];
+    for (const t of ticks) {
+      await sleep(280);
+      display.textContent = t;
     }
+    await sleep(400);
+    cursor.style.opacity = '0';
   }
 
-  // ---- Tasks demo ----
+  // ---- Tasks demo (single pass) ----
   async function runTasksDemo() {
     const stage = document.getElementById('tasksStage');
     const cursor = document.getElementById('tasksCursor');
@@ -216,50 +224,46 @@
     const text = 'Finish chem worksheet';
 
     placeCursor(cursor, 300, 30);
-    while (true) {
-      list.innerHTML = '';
-      input.value = '';
-      input.classList.remove('typing');
-      await sleep(1000);
+    await sleep(600);
 
-      const c1 = await moveTo(cursor, input, stage);
-      ringAt(ring, c1.x, c1.y);
-      input.classList.add('typing');
-      for (let i = 0; i <= text.length; i++) {
-        input.value = text.slice(0, i);
-        await sleep(35);
-      }
-      await sleep(300);
-
-      const c2 = await moveTo(cursor, addBtn, stage);
-      ringAt(ring, c2.x, c2.y);
-      addBtn.classList.add('btn-pressed');
-      await sleep(150);
-      addBtn.classList.remove('btn-pressed');
-      input.classList.remove('typing');
-      input.value = '';
-
-      const li = document.createElement('li');
-      const check = document.createElement('span');
-      check.className = 'mini-check';
-      const span = document.createElement('span');
-      span.textContent = text;
-      li.appendChild(check);
-      li.appendChild(span);
-      list.appendChild(li);
-      await sleep(50);
-      li.classList.add('shown');
-
-      await sleep(800);
-      const c3 = await moveTo(cursor, check, stage);
-      ringAt(ring, c3.x, c3.y);
-      check.classList.add('checked');
-      li.classList.add('done');
-      await sleep(1400);
+    const c1 = await moveTo(cursor, input, stage);
+    ringAt(ring, c1.x, c1.y);
+    input.classList.add('typing');
+    for (let i = 0; i <= text.length; i++) {
+      input.value = text.slice(0, i);
+      await sleep(35);
     }
+    await sleep(300);
+
+    const c2 = await moveTo(cursor, addBtn, stage);
+    ringAt(ring, c2.x, c2.y);
+    addBtn.classList.add('btn-pressed');
+    await sleep(150);
+    addBtn.classList.remove('btn-pressed');
+    input.classList.remove('typing');
+    input.value = '';
+
+    const li = document.createElement('li');
+    const check = document.createElement('span');
+    check.className = 'mini-check';
+    const span = document.createElement('span');
+    span.textContent = text;
+    li.appendChild(check);
+    li.appendChild(span);
+    list.appendChild(li);
+    await sleep(50);
+    li.classList.add('shown');
+
+    await sleep(700);
+    const c3 = await moveTo(cursor, check, stage);
+    ringAt(ring, c3.x, c3.y);
+    check.classList.add('checked');
+    li.classList.add('done');
+    await sleep(400);
+    cursor.style.opacity = '0';
   }
 
-  // ---- Site blocking demo ----
+  // ---- Site blocking demo (single pass) ----
   async function runBlockDemo() {
     const stage = document.getElementById('blockStage');
     const cursor = document.getElementById('blockCursor');
@@ -268,25 +272,22 @@
     const bodyEl = document.getElementById('blockBody');
 
     placeCursor(cursor, 300, 40);
-    while (true) {
-      bodyEl.classList.remove('locked');
-      startBtn.textContent = 'Start session';
-      await sleep(1100);
+    await sleep(700);
 
-      const c1 = await moveTo(cursor, startBtn, stage);
-      ringAt(ring, c1.x, c1.y);
-      startBtn.classList.add('btn-pressed');
-      await sleep(150);
-      startBtn.classList.remove('btn-pressed');
-      bodyEl.classList.add('locked');
-      startBtn.textContent = 'Session active';
-      await sleep(2200);
-    }
+    const c1 = await moveTo(cursor, startBtn, stage);
+    ringAt(ring, c1.x, c1.y);
+    startBtn.classList.add('btn-pressed');
+    await sleep(150);
+    startBtn.classList.remove('btn-pressed');
+    bodyEl.classList.add('locked');
+    startBtn.textContent = 'Session active';
+    await sleep(400);
+    cursor.style.opacity = '0';
   }
 
-  runTimerDemo();
-  runTasksDemo();
-  runBlockDemo();
+  playOnceInView(document.getElementById('timerStage'), runTimerDemo);
+  playOnceInView(document.getElementById('tasksStage'), runTasksDemo);
+  playOnceInView(document.getElementById('blockStage'), runBlockDemo);
 </script>
 
 </body>
