@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>StudyLock — a focus timer that actually locks you in</title>
+<style>
+  :root {
+    --cream: #F4F3EE;
+    --card: #FAF9F6;
+    --ink: #3D3929;
+    --ink-soft: #83816F;
+    --line: #E8E6DD;
+    --terracotta: #D97757;
+    --terracotta-dark: #C15F3C;
+    --terracotta-tint: #F3E3D8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .brand .mark {
+    color: var(--terracotta);
+    font-size: 18px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+
+  .nav-links a { text-decoration: none; }
+  .nav-links a:hover { color: var(--ink); }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: inherit;
+  }
+
+  .btn-primary {
+    background: var(--terracotta);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--terracotta-dark); }
+
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ink);
+  }
+  .btn-ghost:hover { border-color: var(--terracotta); }
+
+  /* HERO */
+  header.hero {
+    padding: 64px 0 40px;
+    text-align: center;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--terracotta-dark);
+    background: var(--terracotta-tint);
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: 48px;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+    max-width: 720px;
+    margin: 0 auto 18px;
+  }
+
+  h1 em {
+    font-style: normal;
+    color: var(--terracotta);
+  }
+
+  .subhead {
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 520px;
+    margin: 0 auto 30px;
+  }
+
+  .hero-ctas {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .hero-note {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-top: 14px;
+  }
+
+  /* DEMO BROWSER */
+  .demo-section { padding: 40px 0 80px; }
+
+  .browser-mock {
+    max-width: 720px;
+    margin: 0 auto;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--card);
+    box-shadow: 0 20px 50px -20px rgba(61, 57, 41, 0.25);
+  }
+
+  .browser-chrome {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: #EDECE4;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .dots { display: flex; gap: 6px; }
+  .dots span {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #D8D6CB;
+  }
+
+  .tab-bar {
+    flex: 1;
+    display: flex;
+    gap: 8px;
+    margin-left: 8px;
+  }
+
+  .tab {
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 8px 8px 0 0;
+    background: var(--cream);
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    border-bottom: none;
+  }
+
+  .tab.active { background: var(--card); color: var(--ink); font-weight: 600; }
+
+  .browser-body {
+    position: relative;
+    min-height: 320px;
+    background: #fff;
+  }
+
+  .site-content {
+    padding: 28px;
+    transition: filter 0.4s ease, opacity 0.4s ease;
+  }
+
+  .site-content h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .site-content p {
+    color: #8a8a8a;
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  .thumb-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .thumb {
+    background: #F1F1F1;
+    border-radius: 8px;
+    aspect-ratio: 16/10;
+  }
+
+  .locked .site-content {
+    filter: blur(6px);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .lock-overlay {
+    position: absolute;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    background: rgba(244, 243, 238, 0.55);
+  }
+
+  .locked .lock-overlay { display: flex; }
+
+  .lock-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--terracotta);
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+
+  .lock-overlay h4 { font-size: 17px; margin-bottom: 4px; font-weight: 650; }
+  .lock-overlay p { font-size: 13px; color: var(--ink-soft); }
+
+  .demo-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-top: 1px solid var(--line);
+    background: var(--card);
+  }
+
+  .demo-timer {
+    font-size: 15px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .demo-timer.hidden { visibility: hidden; }
+
+  /* FEATURES */
+  .features { padding: 20px 0 80px; }
+
+  .section-head {
+    text-align: center;
+    max-width: 480px;
+    margin: 0 auto 44px;
+  }
+
+  .section-head .eyebrow { margin-bottom: 14px; }
+  .section-head h2 { font-size: 32px; font-weight: 650; letter-spacing: -0.01em; margin-bottom: 10px; }
+  .section-head p { color: var(--ink-soft); font-size: 15px; }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .feature-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 26px 22px;
+  }
+
+  .feature-card .ficon {
+    width: 40px; height: 40px;
+    border-radius: 11px;
+    background: var(--terracotta-tint);
+    color: var(--terracotta-dark);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px;
+    margin-bottom: 16px;
+  }
+
+  .feature-card h3 { font-size: 16px; margin-bottom: 6px; font-weight: 650; }
+  .feature-card p { font-size: 13.5px; color: var(--ink-soft); }
+
+  /* STEPS */
+  .steps { padding: 20px 0 90px; }
+
+  .step-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .step {
+    text-align: left;
+    padding: 0 8px;
+  }
+
+  .step .num {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--terracotta);
+    margin-bottom: 10px;
+  }
+
+  .step h4 { font-size: 15px; margin-bottom: 6px; font-weight: 650; }
+  .step p { font-size: 13.5px; color: var(--ink-soft); }
+
+  /* CTA BAND */
+  .cta-band {
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 24px;
+    max-width: 1032px;
+    margin: 0 auto 90px;
+    padding: 56px 40px;
+    text-align: center;
+  }
+
+  .cta-band h2 { font-size: 28px; font-weight: 650; margin-bottom: 10px; }
+  .cta-band p { color: #C9C6B6; font-size: 15px; margin-bottom: 26px; }
+
+  .cta-band .btn-primary { background: var(--terracotta); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 28px 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 720px) {
+    h1 { font-size: 34px; }
+    .nav-links { display: none; }
+    .feature-grid, .step-row { grid-template-columns: 1fr; }
+    .thumb-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav>
+    <div class="brand"><span class="mark">◆</span>StudyLock</div>
+    <div class="nav-links">
+      <a href="#demo">Demo</a>
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+    </div>
+    <a href="#demo" class="btn btn-primary">Add to Browser — Free</a>
+  </nav>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Chrome &amp; Brave extension</span>
+    <h1>A study timer that <em>actually</em> locks you in.</h1>
+    <p class="subhead">Set a session, and StudyLock blocks the sites that pull you away — YouTube, Instagram, TikTok, whatever you choose — until the timer runs out.</p>
+    <div class="hero-ctas">
+      <a href="#demo" class="btn btn-primary">Add to Browser — Free</a>
+      <a href="#demo" class="btn btn-ghost">See it in action ↓</a>
+    </div>
+    <p class="hero-note">No account. No tracking. Runs entirely on your device.</p>
+  </div>
+</header>
+
+<section class="demo-section" id="demo">
+  <div class="wrap">
+    <div class="browser-mock">
+      <div class="browser-chrome">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <div class="tab-bar">
+          <div class="tab active">youtube.com</div>
+          <div class="tab">docs</div>
+        </div>
+      </div>
+      <div class="browser-body" id="browserBody">
+        <div class="site-content">
+          <h3>Recommended for you</h3>
+          <p>youtube.com</p>
+          <div class="thumb-grid">
+            <div class="thumb"></div><div class="thumb"></div><div class="thumb"></div>
+            <div class="thumb"></div><div class="thumb"></div><div class="thumb"></div>
+          </div>
+        </div>
+        <div class="lock-overlay">
+          <div class="lock-icon">◆</div>
+          <h4>Locked in</h4>
+          <p>This site is blocked while your session is active.</p>
+        </div>
+      </div>
+      <div class="demo-controls">
+        <span class="demo-timer hidden" id="demoTimer">24:58</span>
+        <span></span>
+        <button class="btn btn-primary" id="demoToggle">Start session</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">What's inside</span>
+      <h2>Built to keep one thing in view: your work.</h2>
+      <p>Three parts, no clutter — a timer, a task list, and a lock that actually holds.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="ficon">⏱</div>
+        <h3>Flexible timer</h3>
+        <p>Pick 15, 25, 45, or 60 minutes, or set any custom length that fits your session.</p>
+      </div>
+      <div class="feature-card">
+        <div class="ficon">✓</div>
+        <h3>Built-in tasks</h3>
+        <p>Jot down what you're working on before you start, and check items off as you go.</p>
+      </div>
+      <div class="feature-card">
+        <div class="ficon">◆</div>
+        <h3>Real site blocking</h3>
+        <p>Choose exactly which sites get locked. Nothing loads until your session ends.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="steps" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">How it works</span>
+      <h2>Three steps. That's it.</h2>
+    </div>
+    <div class="step-row">
+      <div class="step">
+        <div class="num">01</div>
+        <h4>Install the extension</h4>
+        <p>Add StudyLock to Chrome or Brave in under a minute — no account needed.</p>
+      </div>
+      <div class="step">
+        <div class="num">02</div>
+        <h4>Set your session</h4>
+        <p>Pick a preset or enter a custom time, then add whatever you're working on to the task list.</p>
+      </div>
+      <div class="step">
+        <div class="num">03</div>
+        <h4>Stay locked in</h4>
+        <p>Your blocked sites redirect automatically until the timer runs out — no willpower required.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="cta-band">
+    <h2>Your next study session starts in one click.</h2>
+    <p>Free, local, and ready in under a minute.</p>
+    <a href="#demo" class="btn btn-primary">Add to Browser — Free</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <footer>
+    <div class="brand"><span class="mark">◆</span>StudyLock</div>
+    <span>Built for people who study on their own browser.</span>
+  </footer>
+</div>
+
+<script>
+  const demoToggle = document.getElementById('demoToggle');
+  const browserBody = document.getElementById('browserBody');
+  const demoTimer = document.getElementById('demoTimer');
+  let interval = null;
+  let seconds = 25 * 60;
+
+  function formatTime(s) {
+    const m = Math.floor(s / 60).toString().padStart(2, '0');
+    const sec = (s % 60).toString().padStart(2, '0');
+    return `${m}:${sec}`;
+  }
+
+  demoToggle.addEventListener('click', () => {
+    const isLocked = browserBody.classList.toggle('locked');
+    if (isLocked) {
+      demoToggle.textContent = 'End session';
+      demoTimer.classList.remove('hidden');
+      seconds = 25 * 60;
+      demoTimer.textContent = formatTime(seconds);
+      interval = setInterval(() => {
+        seconds -= 1;
+        demoTimer.textContent = formatTime(seconds);
+        if (seconds <= 0) {
+          clearInterval(interval);
+          browserBody.classList.remove('locked');
+          demoToggle.textContent = 'Start session';
+          demoTimer.classList.add('hidden');
+        }
+      }, 1000);
+    } else {
+      demoToggle.textContent = 'Start session';
+      demoTimer.classList.add('hidden');
+      clearInterval(interval);
+    }
+  });
+</script>
+
+</body>
+</html>
