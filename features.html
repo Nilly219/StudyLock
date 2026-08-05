@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Features — StudyLock</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="wrap">
+  <nav>
+    <a href="index.html" class="brand"><span class="mark">◆</span>StudyLock</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="features.html" class="active">Features</a>
+      <a href="faq.html">FAQ</a>
+      <a href="app.html">App <span class="soon-tag">Soon</span></a>
+      <a href="founder.html">Founder</a>
+    </div>
+    <a href="index.html#demo" class="btn btn-primary">Add to Browser — Free</a>
+  </nav>
+</div>
+
+<div class="page-header">
+  <div class="wrap">
+    <span class="eyebrow">See it in motion</span>
+    <h1>Everything StudyLock does, in action.</h1>
+    <p>Three small demos, playing on loop — no need to click anything.</p>
+  </div>
+</div>
+
+<!-- TIMER DEMO -->
+<section class="demo-block">
+  <div class="wrap">
+    <div class="demo-block-head">
+      <h3>⏱ Flexible timer</h3>
+      <p>Pick a preset or set a custom length — the session starts the moment you click.</p>
+    </div>
+    <div class="device-frame">
+      <div class="device-topbar">Timer</div>
+      <div class="device-stage" id="timerStage">
+        <div id="timerDisplayMini" class="mini-timer-display">25:00</div>
+        <div class="mini-preset-row">
+          <button class="mini-preset-btn" data-m="15">15m</button>
+          <button class="mini-preset-btn active" data-m="25">25m</button>
+          <button class="mini-preset-btn" data-m="45">45m</button>
+          <button class="mini-preset-btn" data-m="60">60m</button>
+        </div>
+        <div style="display:flex; justify-content:center; margin-top:16px;">
+          <button id="timerStartBtn" class="btn btn-primary">Start session</button>
+        </div>
+        <div class="fake-cursor" id="timerCursor">
+          <svg viewBox="0 0 24 24"><path d="M4 2L4 20L9 15.5L12.5 22L15 20.5L11.5 14H18L4 2Z" fill="#3D3929" stroke="white" stroke-width="1"/></svg>
+        </div>
+        <div class="click-ring" id="timerRing"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TASKS DEMO -->
+<section class="demo-block">
+  <div class="wrap">
+    <div class="demo-block-head">
+      <h3>✓ Built-in tasks</h3>
+      <p>Add what you're working on before the session starts, and check it off as you go.</p>
+    </div>
+    <div class="device-frame">
+      <div class="device-topbar">Tasks</div>
+      <div class="device-stage" id="tasksStage">
+        <div class="mini-task-input-row">
+          <input id="tasksInputMini" class="mini-task-input" type="text" placeholder="Add a task..." readonly />
+          <button id="tasksAddBtn" class="mini-add-btn">+</button>
+        </div>
+        <ul id="tasksListMini" class="mini-task-list"></ul>
+        <div class="fake-cursor" id="tasksCursor">
+          <svg viewBox="0 0 24 24"><path d="M4 2L4 20L9 15.5L12.5 22L15 20.5L11.5 14H18L4 2Z" fill="#3D3929" stroke="white" stroke-width="1"/></svg>
+        </div>
+        <div class="click-ring" id="tasksRing"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SITE BLOCKING DEMO -->
+<section class="demo-block">
+  <div class="wrap">
+    <div class="demo-block-head">
+      <h3>◆ Real site blocking</h3>
+      <p>Start a session and chosen sites redirect instantly — nothing loads until it ends.</p>
+    </div>
+    <div class="device-frame">
+      <div class="device-topbar">Site Blocking · youtube.com</div>
+      <div class="device-stage" id="blockStage" style="padding:0;">
+        <div class="browser-body" id="blockBody" style="min-height:220px;">
+          <div class="site-content">
+            <h3>Recommended for you</h3>
+            <p>youtube.com</p>
+            <div class="thumb-grid">
+              <div class="thumb"></div><div class="thumb"></div><div class="thumb"></div>
+            </div>
+          </div>
+          <div class="lock-overlay">
+            <div class="lock-icon">◆</div>
+            <h4>Locked in</h4>
+            <p>Blocked while your session is active.</p>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:center; padding:18px;">
+          <button id="blockStartBtn" class="btn btn-primary">Start session</button>
+        </div>
+        <div class="fake-cursor" id="blockCursor">
+          <svg viewBox="0 0 24 24"><path d="M4 2L4 20L9 15.5L12.5 22L15 20.5L11.5 14H18L4 2Z" fill="#3D3929" stroke="white" stroke-width="1"/></svg>
+        </div>
+        <div class="click-ring" id="blockRing"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="cta-band">
+    <h2>That's the whole app — simple on purpose.</h2>
+    <p>Add it to your browser and try it on your next study session.</p>
+    <a href="index.html#demo" class="btn btn-primary">Add to Browser — Free</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <footer>
+    <div class="brand"><span class="mark">◆</span>StudyLock</div>
+    <span>Built for people who study on their own browser.</span>
+  </footer>
+</div>
+
+<script>
+  function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
+
+  function getCenter(el, stage) {
+    const r = el.getBoundingClientRect();
+    const s = stage.getBoundingClientRect();
+    return { x: r.left - s.left + r.width / 2, y: r.top - s.top + r.height / 2 };
+  }
+
+  function placeCursor(cursor, x, y) {
+    cursor.style.left = (x - 2) + 'px';
+    cursor.style.top = (y - 2) + 'px';
+  }
+
+  async function moveTo(cursor, el, stage) {
+    const c = getCenter(el, stage);
+    placeCursor(cursor, c.x, c.y);
+    await sleep(650);
+    return c;
+  }
+
+  function ringAt(ring, x, y) {
+    ring.style.left = x + 'px';
+    ring.style.top = y + 'px';
+    ring.classList.remove('pulse');
+    void ring.offsetWidth;
+    ring.classList.add('pulse');
+  }
+
+  // ---- Timer demo ----
+  async function runTimerDemo() {
+    const stage = document.getElementById('timerStage');
+    const cursor = document.getElementById('timerCursor');
+    const ring = document.getElementById('timerRing');
+    const presets = stage.querySelectorAll('.mini-preset-btn');
+    const preset45 = stage.querySelector('[data-m="45"]');
+    const startBtn = document.getElementById('timerStartBtn');
+    const display = document.getElementById('timerDisplayMini');
+
+    placeCursor(cursor, 300, 40);
+    while (true) {
+      await sleep(1000);
+      const c1 = await moveTo(cursor, preset45, stage);
+      ringAt(ring, c1.x, c1.y);
+      presets.forEach((b) => b.classList.remove('active'));
+      preset45.classList.add('active');
+      display.textContent = '45:00';
+      await sleep(500);
+
+      const c2 = await moveTo(cursor, startBtn, stage);
+      ringAt(ring, c2.x, c2.y);
+      startBtn.classList.add('btn-pressed');
+      await sleep(180);
+      startBtn.classList.remove('btn-pressed');
+      startBtn.textContent = 'Session active';
+
+      const ticks = ['44:59', '44:58', '44:57', '44:56'];
+      for (const t of ticks) {
+        await sleep(280);
+        display.textContent = t;
+      }
+      await sleep(900);
+
+      startBtn.textContent = 'Start session';
+      presets.forEach((b) => b.classList.remove('active'));
+      document.querySelector('#timerStage [data-m="25"]').classList.add('active');
+      display.textContent = '25:00';
+      await sleep(900);
+    }
+  }
+
+  // ---- Tasks demo ----
+  async function runTasksDemo() {
+    const stage = document.getElementById('tasksStage');
+    const cursor = document.getElementById('tasksCursor');
+    const ring = document.getElementById('tasksRing');
+    const input = document.getElementById('tasksInputMini');
+    const addBtn = document.getElementById('tasksAddBtn');
+    const list = document.getElementById('tasksListMini');
+    const text = 'Finish chem worksheet';
+
+    placeCursor(cursor, 300, 30);
+    while (true) {
+      list.innerHTML = '';
+      input.value = '';
+      input.classList.remove('typing');
+      await sleep(1000);
+
+      const c1 = await moveTo(cursor, input, stage);
+      ringAt(ring, c1.x, c1.y);
+      input.classList.add('typing');
+      for (let i = 0; i <= text.length; i++) {
+        input.value = text.slice(0, i);
+        await sleep(35);
+      }
+      await sleep(300);
+
+      const c2 = await moveTo(cursor, addBtn, stage);
+      ringAt(ring, c2.x, c2.y);
+      addBtn.classList.add('btn-pressed');
+      await sleep(150);
+      addBtn.classList.remove('btn-pressed');
+      input.classList.remove('typing');
+      input.value = '';
+
+      const li = document.createElement('li');
+      const check = document.createElement('span');
+      check.className = 'mini-check';
+      const span = document.createElement('span');
+      span.textContent = text;
+      li.appendChild(check);
+      li.appendChild(span);
+      list.appendChild(li);
+      await sleep(50);
+      li.classList.add('shown');
+
+      await sleep(800);
+      const c3 = await moveTo(cursor, check, stage);
+      ringAt(ring, c3.x, c3.y);
+      check.classList.add('checked');
+      li.classList.add('done');
+      await sleep(1400);
+    }
+  }
+
+  // ---- Site blocking demo ----
+  async function runBlockDemo() {
+    const stage = document.getElementById('blockStage');
+    const cursor = document.getElementById('blockCursor');
+    const ring = document.getElementById('blockRing');
+    const startBtn = document.getElementById('blockStartBtn');
+    const bodyEl = document.getElementById('blockBody');
+
+    placeCursor(cursor, 300, 40);
+    while (true) {
+      bodyEl.classList.remove('locked');
+      startBtn.textContent = 'Start session';
+      await sleep(1100);
+
+      const c1 = await moveTo(cursor, startBtn, stage);
+      ringAt(ring, c1.x, c1.y);
+      startBtn.classList.add('btn-pressed');
+      await sleep(150);
+      startBtn.classList.remove('btn-pressed');
+      bodyEl.classList.add('locked');
+      startBtn.textContent = 'Session active';
+      await sleep(2200);
+    }
+  }
+
+  runTimerDemo();
+  runTasksDemo();
+  runBlockDemo();
+</script>
+
+</body>
+</html>

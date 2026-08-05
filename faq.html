@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FAQ — StudyLock</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="wrap">
+  <nav>
+    <a href="index.html" class="brand"><span class="mark">◆</span>StudyLock</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="faq.html" class="active">FAQ</a>
+      <a href="app.html">App <span class="soon-tag">Soon</span></a>
+      <a href="founder.html">Founder</a>
+    </div>
+    <a href="index.html#demo" class="btn btn-primary">Add to Browser — Free</a>
+  </nav>
+</div>
+
+<div class="page-header">
+  <div class="wrap">
+    <span class="eyebrow">Questions</span>
+    <h1>Frequently asked questions</h1>
+    <p>Everything people usually ask before installing.</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="faq-list" id="faqList">
+
+    <div class="faq-item open">
+      <button class="faq-q">Is StudyLock actually free?<span class="chevron">+</span></button>
+      <div class="faq-a">Yes — StudyLock is free with no account required. There's no trial period or hidden paywall for the current features.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">Does it work on Brave, or only Chrome?<span class="chevron">+</span></button>
+      <div class="faq-a">Both. Brave is built on the same engine as Chrome, so StudyLock installs and runs exactly the same way on either browser.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">Does StudyLock collect or send my data anywhere?<span class="chevron">+</span></button>
+      <div class="faq-a">No. Everything — your tasks, your blocked-site list, your session state — is stored locally in your browser. Nothing is sent to a server.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">Can I choose which sites get blocked?<span class="chevron">+</span></button>
+      <div class="faq-a">Yes. A default list covers the usual suspects (YouTube, Instagram, TikTok, X, Reddit), but you can add or remove any site from the Options page.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">What happens if I close my browser mid-session?<span class="chevron">+</span></button>
+      <div class="faq-a">Your session keeps running in the background. When you reopen your browser, blocked sites will still redirect until the timer's original end time passes.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">Can I end a session early if I need to?<span class="chevron">+</span></button>
+      <div class="faq-a">Yes, there's an "End session" button in the popup at any time — StudyLock isn't trying to lock you out against your will, just remove the temptation.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">Will it slow down my browser?<span class="chevron">+</span></button>
+      <div class="faq-a">No. It uses Chrome's built-in blocking APIs rather than scanning pages itself, so there's no noticeable impact on browsing speed.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">Is there a mobile version?<span class="chevron">+</span></button>
+      <div class="faq-a">Not yet — StudyLock is currently a desktop browser extension only. Mobile isn't ruled out for the future, but it isn't in progress right now.</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="cta-band">
+    <h2>Still have a question?</h2>
+    <p>Read more about why StudyLock exists on the Founder page.</p>
+    <a href="founder.html" class="btn btn-primary">Meet the founder</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <footer>
+    <div class="brand"><span class="mark">◆</span>StudyLock</div>
+    <span>Built for people who study on their own browser.</span>
+  </footer>
+</div>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      btn.parentElement.classList.toggle('open');
+    });
+  });
+</script>
+
+</body>
+</html>
