@@ -29,6 +29,44 @@
   </div>
 </div>
 
+<div class="demo-block">
+  <div class="wrap">
+    <div class="demo-block-head">
+      <h3>A preview of how studying will work</h3>
+      <p>Type your answer. The AI judges it — close counts, typos don't sink you, and you can ask for a hint.</p>
+    </div>
+    <div class="device-frame">
+      <div class="device-topbar">AI Study &middot; Chem Unit 4</div>
+      <div class="device-stage" id="gradingStage" style="min-height:220px;">
+        <div style="font-size:17px;font-weight:500;margin-bottom:16px;">What is the powerhouse of the cell?</div>
+
+        <div style="display:flex;gap:8px;align-items:center;">
+          <input id="answerInput" type="text" class="answer-input" placeholder="Type your answer..." readonly />
+          <div id="submitBtn" class="answer-submit">→</div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:10px;min-height:20px;">
+          <div class="hint-wrap">
+            <button class="hint-trigger">Ask AI for a hint</button>
+            <div id="hintBubble" class="hint-bubble">It's the organelle that makes energy for the cell.</div>
+          </div>
+          <div id="feedbackMsg" style="font-size:12.5px;font-weight:600;"></div>
+        </div>
+
+        <div id="correctPanel" class="correct-panel">
+          <div class="correct-panel-inner">
+            <span style="font-size:16px;color:#3F7A4D;flex-shrink:0;">✓</span>
+            <div>
+              <div class="correct-title">Mitochondria — the powerhouse of the cell</div>
+              <div class="correct-sub">Close enough — small spelling slip, marked correct.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="soon-block">
   <div class="soon-card">
     <div class="soon-icon">◆</div>
@@ -91,6 +129,74 @@
       feedbackSubmit.textContent = 'Send feedback';
     }
   });
+</script>
+
+<script>
+  function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
+
+  async function typeInto(el, text, speed) {
+    el.value = '';
+    for (let i = 0; i <= text.length; i++) {
+      el.value = text.slice(0, i);
+      await sleep(speed);
+    }
+  }
+
+  async function press(el) {
+    el.style.transform = 'scale(0.88)';
+    await sleep(140);
+    el.style.transform = 'scale(1)';
+  }
+
+  async function runGradingDemo() {
+    const input = document.getElementById('answerInput');
+    const submitBtn = document.getElementById('submitBtn');
+    const feedback = document.getElementById('feedbackMsg');
+    const hintBubble = document.getElementById('hintBubble');
+    const correctPanel = document.getElementById('correctPanel');
+
+    await sleep(500);
+
+    await typeInto(input, 'Nucleus', 65);
+    await sleep(400);
+    await press(submitBtn);
+    input.classList.add('shake');
+    input.style.borderColor = '#C0504D';
+    feedback.style.color = '#A33A38';
+    feedback.textContent = 'Not quite';
+    await sleep(500);
+    input.classList.remove('shake');
+    await sleep(900);
+
+    hintBubble.classList.add('show');
+    await sleep(1800);
+    hintBubble.classList.remove('show');
+    await sleep(400);
+
+    input.style.borderColor = '';
+    feedback.textContent = '';
+    await typeInto(input, 'mitocondria', 70);
+    await sleep(400);
+    await press(submitBtn);
+    input.style.borderColor = '#4C8B5B';
+    feedback.style.color = '#3F7A4D';
+    feedback.textContent = 'Correct';
+    await sleep(300);
+    correctPanel.classList.add('show');
+  }
+
+  const gradingStage = document.getElementById('gradingStage');
+  let gradingPlayed = false;
+  const gradingObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && !gradingPlayed) {
+        gradingPlayed = true;
+        runGradingDemo();
+        gradingObserver.unobserve(gradingStage);
+      }
+    });
+  }, { threshold: 0.4 });
+  gradingObserver.observe(gradingStage);
 </script>
 
 <div class="wrap">
