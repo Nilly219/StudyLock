@@ -38,6 +38,61 @@
   </div>
 </div>
 
+<div class="feedback-block">
+  <div class="wrap">
+    <div class="feedback-card">
+      <span class="eyebrow">Help shape it</span>
+      <h3>What would you want in it?</h3>
+      <p class="feedback-sub">Quiz modes, flashcard imports, a specific subject support — whatever you'd actually use. Goes straight to the founder.</p>
+
+      <form id="feedbackForm" class="feedback-form" action="https://formspree.io/f/xwlekrgl" method="POST">
+        <div class="feedback-row">
+          <input type="text" name="name" placeholder="Name (optional)" />
+          <input type="email" name="email" placeholder="Email (optional, if you want a reply)" />
+        </div>
+        <textarea name="message" placeholder="What would you like to see in the app?" required></textarea>
+        <button type="submit" class="btn btn-primary" id="feedbackSubmit">Send feedback</button>
+      </form>
+
+      <p class="feedback-status" id="feedbackStatus"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const feedbackForm = document.getElementById('feedbackForm');
+  const feedbackStatus = document.getElementById('feedbackStatus');
+  const feedbackSubmit = document.getElementById('feedbackSubmit');
+
+  feedbackForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    feedbackSubmit.disabled = true;
+    feedbackSubmit.textContent = 'Sending...';
+
+    try {
+      const res = await fetch(feedbackForm.action, {
+        method: 'POST',
+        body: new FormData(feedbackForm),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        feedbackForm.reset();
+        feedbackForm.style.display = 'none';
+        feedbackStatus.textContent = "Thanks — that's been sent.";
+      } else {
+        feedbackStatus.textContent = 'Something went wrong. Try again in a moment.';
+        feedbackSubmit.disabled = false;
+        feedbackSubmit.textContent = 'Send feedback';
+      }
+    } catch (err) {
+      feedbackStatus.textContent = 'Something went wrong. Try again in a moment.';
+      feedbackSubmit.disabled = false;
+      feedbackSubmit.textContent = 'Send feedback';
+    }
+  });
+</script>
+
 <div class="wrap">
   <footer>
     <div class="brand"><span class="mark">◆</span>StudyLock</div>
