@@ -11,16 +11,33 @@
 <div class="wrap">
   <nav>
     <a href="index.html" class="brand"><span class="mark">◆</span>StudyLock</a>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a href="index.html" class="active">Home</a>
       <a href="features.html">Features</a>
       <a href="faq.html">FAQ</a>
       <a href="app.html">App <span class="soon-tag">Soon</span></a>
       <a href="founder.html">Founder</a>
     </div>
+    <button id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false">&#9776;</button>
     <a href="#demo" class="btn btn-primary">Add to Browser — Free</a>
   </nav>
 </div>
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.innerHTML = isOpen ? '&#10005;' : '&#9776;';
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  navLinks.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.innerHTML = '&#9776;';
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
 
 <header class="hero" id="demo">
   <div class="ambient-glow"></div>

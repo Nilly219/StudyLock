@@ -11,21 +11,39 @@
 <div class="wrap">
   <nav>
     <a href="index.html" class="brand"><span class="mark">◆</span>StudyLock</a>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a href="index.html">Home</a>
       <a href="features.html">Features</a>
       <a href="faq.html">FAQ</a>
       <a href="app.html" class="active">App <span class="soon-tag">Soon</span></a>
       <a href="founder.html">Founder</a>
     </div>
+    <button id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false">&#9776;</button>
     <a href="index.html#demo" class="btn btn-primary">Add to Browser — Free</a>
   </nav>
 </div>
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.innerHTML = isOpen ? '&#10005;' : '&#9776;';
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  navLinks.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.innerHTML = '&#9776;';
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
 
 <div class="page-header">
   <div class="wrap">
     <span class="eyebrow">In the works</span>
     <h1>StudyLock App</h1>
+    <p>An AI-powered study app that works alongside the blocker — think flashcards and active recall, built into the same lock-in flow.</p>
   </div>
 </div>
 
@@ -67,12 +85,49 @@
   </div>
 </div>
 
-<div class="soon-block">
-  <div class="soon-card">
-    <div class="soon-icon">◆</div>
-    <h2>Coming soon</h2>
-    <p>An AI-powered study app that works alongside the blocker — think flashcards and active recall, built into the same lock-in flow.</p>
-    <p>Details soon.</p>
+<div class="demo-block">
+  <div class="wrap">
+    <div class="demo-block-head">
+      <h3>Turn notes into flashcards automatically</h3>
+      <p>Drop in a file and the AI reads it, then builds a deck around what's actually in it.</p>
+    </div>
+    <div class="device-frame" id="uploadDemoFrame">
+      <div class="device-topbar">Upload &amp; generate</div>
+      <div class="device-stage" style="min-height:auto;">
+        <div id="uploadDropzone" class="dropzone" style="position:relative;width:100%;height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
+          <div class="upload-icon-circle">↑</div>
+          <div style="font-size:13px;color:var(--ink-soft);">Drag a file here to generate flashcards</div>
+
+          <div id="uploadDragGroup" class="draggroup" style="top:-46px;">
+            <div style="width:16px;height:16px;">
+              <svg viewBox="0 0 24 24" style="width:100%;height:100%;"><path d="M4 2L4 20L9 15.5L12.5 22L15 20.5L11.5 14H18L4 2Z" fill="#3D3929" stroke="white" stroke-width="1"/></svg>
+            </div>
+            <div id="uploadFileChip" class="filechip">Bio_Notes.pdf</div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;">
+          <div id="uploadProcessing" class="upload-fadeblock" style="display:none;flex-direction:column;align-items:center;gap:8px;padding:6px 0;">
+            <div class="upload-spinner"></div>
+            <div style="font-size:13.5px;font-weight:600;">Processing Bio_Notes.pdf&hellip;</div>
+            <div class="upload-progress-track"><div id="uploadProgressFill" class="upload-progress-fill"></div></div>
+          </div>
+
+          <div id="uploadResults" class="upload-fadeblock" style="display:none;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+              <span style="color:#3F7A4D;font-size:16px;">✓</span>
+              <div style="font-size:13.5px;font-weight:600;">4 topics found in Bio_Notes.pdf</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+              <div class="topic-chip" id="topicChip1">Cell structure</div>
+              <div class="topic-chip" id="topicChip2">Photosynthesis</div>
+              <div class="topic-chip" id="topicChip3">Genetics basics</div>
+              <div class="topic-chip" id="topicChip4">Mitosis vs meiosis</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -80,6 +135,7 @@
   <div class="wrap">
     <div class="feedback-card">
       <span class="eyebrow">Help shape it</span>
+
       <h3>What would you want in it?</h3>
       <p class="feedback-sub">Quiz modes, flashcard imports, a specific subject support — whatever you'd actually use. Goes straight to the founder.</p>
 
@@ -197,6 +253,89 @@
     });
   }, { threshold: 0.4 });
   gradingObserver.observe(gradingStage);
+</script>
+
+<script>
+  async function crossfadeUpload(from, to, toDisplay) {
+    if (from) {
+      from.classList.remove('show');
+      await sleep(300);
+      from.style.display = 'none';
+    }
+    to.style.display = toDisplay;
+    void to.offsetWidth;
+    to.classList.add('show');
+    await sleep(300);
+  }
+
+  async function runUploadDemo() {
+    const zone = document.getElementById('uploadDropzone');
+    const group = document.getElementById('uploadDragGroup');
+    const chip = document.getElementById('uploadFileChip');
+    const proc = document.getElementById('uploadProcessing');
+    const res = document.getElementById('uploadResults');
+    const fill = document.getElementById('uploadProgressFill');
+    const chips = ['topicChip1', 'topicChip2', 'topicChip3', 'topicChip4'].map((id) => document.getElementById(id));
+
+    await sleep(700);
+    group.style.top = '40px';
+    await sleep(700);
+    zone.classList.add('hover');
+    chip.style.transform = 'scale(0.94)';
+    await sleep(180);
+    chip.style.transform = 'scale(1)';
+    await sleep(400);
+    group.style.opacity = '0';
+    zone.classList.remove('hover');
+    await sleep(600);
+
+    await crossfadeUpload(null, proc, 'flex');
+    await sleep(80);
+    fill.style.transition = 'width 1.4s linear';
+    fill.style.width = '100%';
+    await sleep(1600);
+
+    await crossfadeUpload(proc, res, 'block');
+    for (const c of chips) {
+      c.classList.add('show');
+      await sleep(160);
+    }
+  }
+
+  const uploadStage = document.getElementById('uploadDemoFrame');
+  let uploadPlayed = false;
+
+  function playUploadDemoOnce() {
+    if (uploadPlayed) return;
+    uploadPlayed = true;
+    runUploadDemo();
+    uploadObserver.disconnect();
+  }
+
+  const uploadObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) playUploadDemoOnce();
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+  uploadObserver.observe(uploadStage);
+
+  // Fallback: some browsers/extensions can suppress IntersectionObserver
+  // callbacks (or the card can load already on-screen in odd viewport
+  // sizes). If the card is visible on scroll/resize but the observer
+  // never fired, trigger the demo directly instead of leaving it stuck.
+  function uploadStageIsVisible() {
+    const rect = uploadStage.getBoundingClientRect();
+    return rect.top < window.innerHeight * 0.9 && rect.bottom > 0;
+  }
+  ['scroll', 'resize'].forEach((evt) => {
+    window.addEventListener(evt, () => {
+      if (!uploadPlayed && uploadStageIsVisible()) playUploadDemoOnce();
+    }, { passive: true });
+  });
+  // Also check once on load in case the card is already in view.
+  window.addEventListener('load', () => {
+    if (!uploadPlayed && uploadStageIsVisible()) playUploadDemoOnce();
+  });
 </script>
 
 <div class="wrap">

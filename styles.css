@@ -35,6 +35,18 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 20px 0;
+  position: relative;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 6px;
 }
 
 .brand {
@@ -866,6 +878,96 @@ footer {
 .correct-title { font-size: 13.5px; font-weight: 600; color: #2E5B39; }
 .correct-sub { font-size: 12px; color: #4A6E52; margin-top: 2px; }
 
+/* UPLOAD & GENERATE DEMO (app page) */
+@keyframes uploadSpin { to { transform: rotate(360deg); } }
+
+.upload-spinner {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 3px solid var(--line);
+  border-top-color: var(--terracotta);
+  animation: uploadSpin 0.9s linear infinite;
+}
+
+.dropzone {
+  border: 1.5px dashed var(--line);
+  border-radius: 14px;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.dropzone.hover { border-color: var(--terracotta); background: var(--terracotta-tint); }
+
+.upload-icon-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--terracotta);
+  font-size: 15px;
+}
+
+.draggroup {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: top 0.7s var(--ease-premium), opacity 0.3s ease;
+}
+
+.filechip {
+  position: absolute;
+  top: 2px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 7px 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: transform 0.2s ease;
+}
+
+.upload-progress-track {
+  width: 70%;
+  height: 5px;
+  background: var(--line);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+.upload-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--terracotta);
+  border-radius: 99px;
+}
+
+.upload-fadeblock { opacity: 0; transition: opacity 0.3s ease; }
+.upload-fadeblock.show { opacity: 1; }
+
+.topic-chip {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.topic-chip.show { opacity: 1; transform: translateY(0); }
+
 /* FEEDBACK FORM (app page) */
 .feedback-block { padding: 10px 0 100px; }
 
@@ -958,9 +1060,70 @@ footer {
 .soon-card p { color: var(--ink-soft); font-size: 14.5px; margin-bottom: 6px; }
 
 @media (max-width: 720px) {
-  h1 { font-size: 34px; }
-  .nav-links { display: none; }
+  h1 { font-size: 32px; }
+
+  .nav-toggle { display: block; }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 8px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: 0 16px 32px -16px rgba(61, 57, 41, 0.3);
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transition: max-height 0.3s ease, opacity 0.25s ease;
+    z-index: 40;
+  }
+
+  .nav-links.open {
+    max-height: 320px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-links a {
+    width: 100%;
+    padding: 10px 8px;
+    border-bottom: none;
+    border-radius: 8px;
+  }
+
+  .nav-links a.active { background: var(--terracotta-tint); }
+  .nav-links a:hover { background: var(--cream); }
+
+  header.hero { padding: 44px 0 32px; }
+  .hero-ctas { flex-direction: column; }
+  .hero-ctas .btn { width: 100%; justify-content: center; }
+
+  .compare-intro h2 { font-size: 27px; }
+  .compare-sticky h3 { font-size: 21px; }
+
+  .cta-band { padding: 40px 24px; }
+  .cta-band h2 { font-size: 23px; }
+
+  .demo-block-head h3 { font-size: 18px; }
+  .device-frame, .browser-mock { border-radius: 14px; }
+
   .feature-grid, .step-row { grid-template-columns: 1fr; }
   .thumb-grid { grid-template-columns: repeat(2, 1fr); }
   .founder-card { padding: 28px 22px; }
+  .soon-card { padding: 36px 24px; }
+}
+
+@media (max-width: 460px) {
+  .wrap { padding: 0 18px; }
+  h1 { font-size: 27px; }
+  .compare-intro h2 { font-size: 23px; }
+  .mini-preset-row { flex-wrap: wrap; }
 }
