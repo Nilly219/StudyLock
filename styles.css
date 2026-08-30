@@ -118,6 +118,12 @@ nav {
 }
 .btn-ghost:hover { border-color: var(--terracotta); }
 
+/* NAV CTA — "StudyL[lock]ck — Coming Soon" wordmark button */
+.wordmark { display: inline-flex; align-items: baseline; font-weight: 700; letter-spacing: -0.01em; }
+.lock-o { display: inline-block; position: relative; line-height: 0; }
+.lock-o svg { position: absolute; left: 0; bottom: 0; display: block; overflow: visible; }
+.btn .suffix { font-weight: 500; opacity: 0.85; margin-left: 6px; font-size: 0.9em; }
+
 /* PAGE HEADER (non-hero pages) */
 .page-header {
   padding: 56px 0 8px;
@@ -768,14 +774,24 @@ footer {
 }
 
 .founder-avatar {
-  width: 76px; height: 76px;
-  border-radius: 50%;
+  width: 184px; height: 245px;
+  border-radius: 18px;
   background: var(--terracotta-tint);
   color: var(--terracotta-dark);
   font-size: 28px;
   font-weight: 650;
   display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 18px;
+  margin: 0 auto 20px;
+  overflow: hidden;
+  box-shadow: 0 16px 34px -18px rgba(61, 57, 41, 0.35);
+}
+
+.founder-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 38%;
+  border-radius: 18px;
 }
 
 .founder-card h2 { font-size: 22px; font-weight: 650; margin-bottom: 4px; }
