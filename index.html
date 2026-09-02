@@ -8,6 +8,7 @@
 </head>
 <body>
 
+<div class="site-header">
 <div class="wrap">
   <nav>
     <a href="index.html" class="brand"><span class="mark">◆</span>StudyLock</a>
@@ -21,6 +22,7 @@
     <button id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false">&#9776;</button>
     <a href="app.html" class="btn btn-primary"><span class="wordmark">StudyL<span class="lock-o"></span>ck</span><span class="suffix">Coming Soon</span></a>
   </nav>
+</div>
 </div>
 <script>
   const navToggle = document.getElementById('navToggle');
@@ -38,16 +40,17 @@
     });
   });
 </script>
-<script src="studylock-logo.js"></script>
+<script src="studylock-ui.js"></script>
 
 <header class="hero" id="demo">
   <div class="ambient-glow"></div>
+  <div class="ambient-glow-2"></div>
   <div class="wrap">
     <span class="eyebrow reveal" style="transition-delay:0ms">Chrome &amp; Brave extension</span>
     <h1 class="reveal" style="transition-delay:100ms">A study timer that <em>actually</em> locks you in.</h1>
     <p class="subhead reveal" style="transition-delay:200ms">Set a session, and StudyLock blocks the sites that pull you away — YouTube, Instagram, TikTok, whatever you choose — until the timer runs out.</p>
     <div class="hero-ctas reveal" style="transition-delay:300ms">
-      <a href="index.html#demo" class="btn btn-primary">Add to Browser — Free</a>
+      <a href="app.html" class="btn btn-primary"><span class="wordmark">StudyL<span class="lock-o"></span>ck</span><span class="suffix">Coming Soon</span></a>
       <a href="#why" class="btn btn-ghost">Why it's different ↓</a>
     </div>
     <p class="hero-note reveal" style="transition-delay:400ms">No account. No tracking. Runs entirely on your device.</p>
@@ -73,44 +76,44 @@
 
       <div class="compare-rows">
         <div class="compare-row reveal">
-          <div class="compare-col others">
+          <div class="compare-col others spotlight">
             <span class="tag">✕ Most blockers</span>
             <p>Block sites, but have no idea what you're supposed to be working on instead.</p>
           </div>
-          <div class="compare-col ours">
+          <div class="compare-col ours spotlight">
             <span class="tag">◆ StudyLock</span>
             <p>Bundles a task list into the same popup — you set your work and your lock in one motion.</p>
           </div>
         </div>
 
         <div class="compare-row reveal">
-          <div class="compare-col others">
+          <div class="compare-col others spotlight">
             <span class="tag">✕ Most timers</span>
             <p>Count down quietly in a tab. Nothing stops you from opening a new one and scrolling anyway.</p>
           </div>
-          <div class="compare-col ours">
+          <div class="compare-col ours spotlight">
             <span class="tag">◆ StudyLock</span>
             <p>Actually redirects blocked sites at the browser level — the tab loads, then goes nowhere.</p>
           </div>
         </div>
 
         <div class="compare-row reveal">
-          <div class="compare-col others">
+          <div class="compare-col others spotlight">
             <span class="tag">✕ Most focus apps</span>
             <p>Want an account, sync your activity to a server, sometimes sell that data on.</p>
           </div>
-          <div class="compare-col ours">
+          <div class="compare-col ours spotlight">
             <span class="tag">◆ StudyLock</span>
             <p>No login, no server. Your sessions and tasks stay stored locally, on your device only.</p>
           </div>
         </div>
 
         <div class="compare-row reveal">
-          <div class="compare-col others">
+          <div class="compare-col others spotlight">
             <span class="tag">✕ Most extensions</span>
             <p>Bury the one setting you want under menus, or ask for permissions that don't add up.</p>
           </div>
-          <div class="compare-col ours">
+          <div class="compare-col ours spotlight">
             <span class="tag">◆ StudyLock</span>
             <p>Three things, done well: a timer, a task list, a lock. Nothing else competing for your attention.</p>
           </div>
@@ -120,26 +123,26 @@
   </div>
 </section>
 
-<section class="features reveal" id="features">
+<section class="features" id="features">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="eyebrow">What's inside</span>
       <h2>Built to keep one thing in view: your work.</h2>
       <p>Three parts, no clutter — a timer, a task list, and a lock that actually holds.</p>
       <span class="divider-line"></span>
     </div>
     <div class="feature-grid">
-      <a href="features.html" class="feature-card link-card">
+      <a href="features.html" class="feature-card link-card reveal spotlight">
         <div class="ficon">⏱</div>
         <h3>Flexible timer</h3>
         <p>Pick 15, 25, 45, or 60 minutes, or set any custom length that fits your session.</p>
       </a>
-      <a href="features.html" class="feature-card link-card">
+      <a href="features.html" class="feature-card link-card reveal spotlight">
         <div class="ficon">✓</div>
         <h3>Built-in tasks</h3>
         <p>Jot down what you're working on before you start, and check items off as you go.</p>
       </a>
-      <a href="features.html" class="feature-card link-card">
+      <a href="features.html" class="feature-card link-card reveal spotlight">
         <div class="ficon">◆</div>
         <h3>Real site blocking</h3>
         <p>Choose exactly which sites get locked. Nothing loads until your session ends.</p>
@@ -148,25 +151,25 @@
   </div>
 </section>
 
-<section class="steps reveal" id="how">
+<section class="steps" id="how">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="eyebrow">How it works</span>
       <h2>Three steps. That's it.</h2>
       <span class="divider-line"></span>
     </div>
     <div class="step-row">
-      <div class="step">
+      <div class="step reveal">
         <div class="num">01</div>
         <h4>Install the extension</h4>
         <p>Add StudyLock to Chrome or Brave in under a minute — no account needed.</p>
       </div>
-      <div class="step">
+      <div class="step reveal">
         <div class="num">02</div>
         <h4>Set your session</h4>
         <p>Pick a preset or enter a custom time, then add whatever you're working on to the task list.</p>
       </div>
-      <div class="step">
+      <div class="step reveal">
         <div class="num">03</div>
         <h4>Stay locked in</h4>
         <p>Your blocked sites redirect automatically until the timer runs out — no willpower required.</p>
@@ -179,7 +182,7 @@
   <div class="cta-band reveal">
     <h2>Your next study session starts in one click.</h2>
     <p>Free, local, and ready in under a minute.</p>
-    <a href="#demo" class="btn btn-primary">Add to Browser — Free</a>
+    <a href="app.html" class="btn btn-primary"><span class="wordmark">StudyL<span class="lock-o"></span>ck</span><span class="suffix">Coming Soon</span></a>
   </div>
 </div>
 
@@ -189,24 +192,6 @@
     <span>Built for people who study on their own browser.</span>
   </footer>
 </div>
-
-<script>
-  // Stagger the four comparison rows so they don't all fade in at once
-  document.querySelectorAll('.compare-row.reveal').forEach((row, i) => {
-    row.style.transitionDelay = (i * 110) + 'ms';
-  });
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-
-  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
-</script>
 
 </body>
 </html>
