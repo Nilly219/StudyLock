@@ -60,9 +60,27 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-body);
-  background: var(--cream);
+  background:
+    radial-gradient(1100px 760px at 12% -8%, rgba(255, 107, 91, 0.12), transparent 60%),
+    radial-gradient(900px 680px at 104% 6%, rgba(244, 237, 224, 0.05), transparent 55%),
+    linear-gradient(180deg, #0D1830 0%, var(--navy) 30%, #101D38 100%);
+  background-attachment: fixed;
   color: var(--ink);
   line-height: 1.5;
+  position: relative;
+}
+
+/* subtle film-grain texture over the whole page, so the navy ground reads
+   as a textured surface rather than a flat fill */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 
 a { color: inherit; }
@@ -215,7 +233,7 @@ nav {
 }
 
 .page-header .eyebrow { margin-bottom: 16px; }
-.page-header h1 { font-family: var(--font-display); font-size: 40px; font-weight: 650; letter-spacing: -0.01em; margin-bottom: 12px; }
+.page-header h1 { font-family: var(--font-display); font-size: 40px; font-weight: 380; letter-spacing: -0.01em; margin-bottom: 12px; }
 .page-header p { color: var(--ink-soft); font-size: 15.5px; max-width: 520px; margin: 0 auto; }
 
 /* HERO (home only) — a pinned, full-viewport headline you scroll past.
@@ -255,6 +273,93 @@ nav {
   text-align: center;
 }
 
+/* LAPTOP ZOOM — a scroll-scrubbed intro: a laptop rises and its lid opens,
+   then as you keep scrolling the whole rig scales up so the screen fills
+   the frame, handing off into the comparison section underneath. Driven
+   entirely by scroll position (see initLaptopZoom in studylock-ui.js) —
+   no autoplay, it only moves while you're scrolling. */
+.laptop-zoom {
+  position: relative;
+  height: 280vh;
+}
+
+.laptop-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  perspective: 1800px;
+}
+
+.laptop-rig {
+  position: relative;
+  width: min(760px, 82vw);
+  opacity: 0;
+  transform-origin: 50% 32%;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+.laptop-lid {
+  position: relative;
+  transform-origin: 50% 100%;
+  transform: rotateX(-92deg);
+  will-change: transform;
+}
+
+.laptop-screen {
+  border-radius: 14px 14px 3px 3px;
+  overflow: hidden;
+  border: 10px solid #05070D;
+  background: var(--navy-deep);
+  box-shadow: 0 50px 100px -30px rgba(0, 0, 0, 0.75);
+}
+
+.laptop-screen .browser-body { min-height: 260px; }
+
+.laptop-notch {
+  width: 64px;
+  height: 9px;
+  background: #05070D;
+  margin: 0 auto;
+  border-radius: 0 0 7px 7px;
+}
+
+.laptop-base {
+  width: 112%;
+  margin-left: -6%;
+  height: 16px;
+  background: linear-gradient(180deg, #1C2740, #060A14);
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 24px 50px -14px rgba(0, 0, 0, 0.65);
+}
+
+.laptop-hinge {
+  height: 4px;
+  margin: 0 22%;
+  background: #05070D;
+  border-radius: 2px;
+}
+
+.laptop-hint {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  z-index: 1;
+}
+
+@media (max-width: 720px) {
+  .laptop-zoom { height: 190vh; }
+  .laptop-rig { width: 88vw; }
+}
+
 header.hero {
   padding: 64px 0 40px;
   text-align: center;
@@ -277,7 +382,7 @@ header.hero {
 h1 {
   font-family: var(--font-display);
   font-size: 52px;
-  font-weight: 650;
+  font-weight: 340;
   letter-spacing: -0.015em;
   line-height: 1.1;
   max-width: 720px;
@@ -286,7 +391,7 @@ h1 {
 
 h1 em {
   font-style: italic;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--coral);
 }
 
@@ -425,7 +530,7 @@ h1 em {
   margin-bottom: 14px;
 }
 
-.lock-overlay h4 { font-family: var(--font-display); font-size: 18px; margin-bottom: 4px; font-weight: 650; }
+.lock-overlay h4 { font-family: var(--font-display); font-size: 18px; margin-bottom: 4px; font-weight: 380; }
 .lock-overlay p { font-size: 13px; color: var(--ink-soft); }
 
 .demo-controls {
@@ -480,13 +585,12 @@ h1 em {
    in index.html's script) */
 .ambient-glow {
   position: absolute;
-  top: -260px;
-  left: 50%;
-  width: 900px;
-  height: 900px;
-  transform: translateX(-50%);
-  background: radial-gradient(circle, rgba(255, 107, 91, 0.16), transparent 70%);
-  filter: blur(10px);
+  bottom: -220px;
+  left: -180px;
+  width: 980px;
+  height: 980px;
+  background: radial-gradient(circle, rgba(255, 107, 91, 0.26), transparent 68%);
+  filter: blur(14px);
   pointer-events: none;
   z-index: 0;
   animation: driftGlow 18s ease-in-out infinite alternate;
@@ -494,22 +598,22 @@ h1 em {
 
 .ambient-glow-2 {
   position: absolute;
-  top: -120px;
-  left: calc(50% + var(--mx, 0px));
-  width: 560px;
-  height: 560px;
-  transform: translateX(-50%);
-  background: radial-gradient(circle, rgba(244, 237, 224, 0.08), transparent 72%);
-  filter: blur(6px);
+  top: -140px;
+  right: -160px;
+  left: auto;
+  width: 640px;
+  height: 640px;
+  background: radial-gradient(circle, rgba(244, 237, 224, 0.1), transparent 72%);
+  filter: blur(8px);
   pointer-events: none;
   z-index: 0;
-  transition: left 1.4s var(--ease-premium);
-  animation: driftGlow 12s ease-in-out infinite alternate-reverse;
+  transform: translateX(var(--mx, 0px));
+  transition: transform 1.4s var(--ease-premium);
 }
 
 @keyframes driftGlow {
-  from { transform: translate(-52%, 0) scale(1); }
-  to { transform: translate(-48%, 24px) scale(1.06); }
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(18px, -22px) scale(1.07); }
 }
 
 header.hero { position: relative; overflow: hidden; }
@@ -527,7 +631,7 @@ header.hero .wrap { position: relative; z-index: 1; }
 .compare-intro h2 {
   font-family: var(--font-display);
   font-size: 36px;
-  font-weight: 650;
+  font-weight: 340;
   letter-spacing: -0.01em;
   line-height: 1.15;
   margin: 14px 0 12px;
@@ -548,7 +652,7 @@ header.hero .wrap { position: relative; z-index: 1; }
 }
 
 .compare-sticky .eyebrow { margin-bottom: 14px; }
-.compare-sticky h3 { font-family: var(--font-display); font-size: 25px; font-weight: 650; letter-spacing: -0.005em; margin-bottom: 12px; line-height: 1.25; }
+.compare-sticky h3 { font-family: var(--font-display); font-size: 25px; font-weight: 380; letter-spacing: -0.005em; margin-bottom: 12px; line-height: 1.25; }
 .compare-sticky p { color: var(--ink-soft); font-size: 14px; }
 
 .compare-rows {
@@ -639,7 +743,7 @@ header.hero .wrap { position: relative; z-index: 1; }
 }
 
 .section-head .eyebrow { margin-bottom: 14px; }
-.section-head h2 { font-family: var(--font-display); font-size: 34px; font-weight: 650; letter-spacing: -0.005em; margin-bottom: 10px; }
+.section-head h2 { font-family: var(--font-display); font-size: 34px; font-weight: 340; letter-spacing: -0.005em; margin-bottom: 10px; }
 .section-head p { color: var(--ink-soft); font-size: 15px; }
 
 .feature-grid {
@@ -667,7 +771,7 @@ header.hero .wrap { position: relative; z-index: 1; }
   margin-bottom: 16px;
 }
 
-.feature-card h3 { font-family: var(--font-display); font-size: 18px; margin-bottom: 6px; font-weight: 650; }
+.feature-card h3 { font-family: var(--font-display); font-size: 18px; margin-bottom: 6px; font-weight: 380; }
 .feature-card p { font-size: 13.5px; color: var(--ink-soft); }
 
 .feature-card.link-card { text-decoration: none; display: block; transition: border-color .3s ease, transform .35s var(--ease-premium), box-shadow .35s ease; }
@@ -730,7 +834,7 @@ header.hero .wrap { position: relative; z-index: 1; }
   text-align: center;
 }
 
-.cta-band h2 { font-family: var(--font-display); font-size: 30px; font-weight: 650; margin-bottom: 10px; color: var(--navy); }
+.cta-band h2 { font-family: var(--font-display); font-size: 30px; font-weight: 380; margin-bottom: 10px; color: var(--navy); }
 .cta-band p { color: rgba(20, 33, 61, 0.72); font-size: 15px; margin-bottom: 26px; }
 
 /* on the coral band, invert to a solid navy pill so it still reads as "primary" */
@@ -760,7 +864,7 @@ footer {
   margin: 0 auto 20px;
 }
 
-.demo-block-head h3 { font-family: var(--font-display); font-size: 22px; font-weight: 650; margin-bottom: 6px; }
+.demo-block-head h3 { font-family: var(--font-display); font-size: 22px; font-weight: 380; margin-bottom: 6px; }
 .demo-block-head p { color: var(--ink-soft); font-size: 14px; }
 
 .device-frame {
@@ -990,7 +1094,7 @@ footer {
   border-radius: var(--radius-md);
 }
 
-.founder-card h2 { font-family: var(--font-display); font-size: 25px; font-weight: 650; margin-bottom: 4px; }
+.founder-card h2 { font-family: var(--font-display); font-size: 25px; font-weight: 380; margin-bottom: 4px; }
 .founder-role { color: var(--terracotta-dark); font-size: 13px; font-weight: 600; margin-bottom: 20px; }
 .founder-card p.bio { font-size: 14.5px; color: var(--ink); text-align: left; margin-bottom: 16px; }
 .founder-card p.bio:last-child { margin-bottom: 0; }
@@ -1195,7 +1299,7 @@ footer {
 }
 
 .feedback-card .eyebrow { margin-bottom: 14px; }
-.feedback-card h3 { font-family: var(--font-display); font-size: 23px; font-weight: 650; margin-bottom: 8px; }
+.feedback-card h3 { font-family: var(--font-display); font-size: 23px; font-weight: 380; margin-bottom: 8px; }
 .feedback-sub { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; }
 
 .feedback-form { text-align: left; }
@@ -1271,7 +1375,7 @@ footer {
   margin: 0 auto 20px;
 }
 
-.soon-card h2 { font-family: var(--font-display); font-size: 25px; font-weight: 650; margin-bottom: 10px; }
+.soon-card h2 { font-family: var(--font-display); font-size: 25px; font-weight: 380; margin-bottom: 10px; }
 .soon-card p { color: var(--ink-soft); font-size: 14.5px; margin-bottom: 6px; }
 
 @media (max-width: 720px) {

@@ -146,6 +146,64 @@
     });
   }
 
+  // ---------------------------------------------------------------------
+  // Laptop zoom — a scroll-scrubbed intro (index.html only). ".laptop-zoom"
+  // is a tall wrapper; ".laptop-stage" is sticky inside it, so scrolling
+  // through that extra height drives a progress value from 0 to 1, which
+  // we map straight onto transforms — no autoplay, no scroll-snap, it
+  // tracks the scrollbar exactly and simply stops when you stop scrolling.
+  //   0.00–0.35  the laptop rises into place and the lid opens
+  //   0.35–1.00  the whole rig scales up so the screen fills the frame,
+  //              fading out right at the end to hand off to the section
+  //              underneath (the real comparison content, not a replica
+  //              squeezed into the tiny screen)
+  function initLaptopZoom() {
+    const wrap = document.querySelector('.laptop-zoom');
+    const stage = document.querySelector('.laptop-stage');
+    const rig = document.querySelector('.laptop-rig');
+    const lid = document.querySelector('.laptop-lid');
+    if (!wrap || !stage || !rig || !lid) return;
+
+    const OPEN_END = 0.35;
+    let ticking = false;
+
+    function update() {
+      ticking = false;
+      const rect = wrap.getBoundingClientRect();
+      const total = rect.height - window.innerHeight;
+      if (total <= 0) return;
+      const progress = Math.min(1, Math.max(0, -rect.top / total));
+
+      const openT = Math.min(1, progress / OPEN_END);
+      const openEased = 1 - Math.pow(1 - openT, 3);
+      const lidAngle = -92 + openEased * 92;
+      const rise = (1 - openEased) * 70;
+
+      const zoomT = Math.max(0, (progress - OPEN_END) / (1 - OPEN_END));
+      const zoomEased = zoomT * zoomT;
+      const scale = 1 + zoomEased * 7.5;
+      const fadeOut = Math.max(0, Math.min(1, (zoomT - 0.82) / 0.18));
+
+      rig.style.opacity = openEased * (1 - fadeOut);
+      rig.style.transform = `translateY(${rise}px) scale(${scale})`;
+      lid.style.transform = `rotateX(${lidAngle}deg)`;
+
+      const hint = wrap.querySelector('.laptop-hint');
+      if (hint) hint.style.opacity = progress < 0.08 ? 1 : Math.max(0, 1 - progress / 0.3);
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    }
+
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+  }
+
   // This <script> tag sits right after the nav, near the top of <body> —
   // earlier than the .reveal/.spotlight content further down the page —
   // so anything that queries that later content has to wait for the full
@@ -155,6 +213,7 @@
     initStickyHeader();
     initSpotlight();
     initHeroGlow();
+    initLaptopZoom();
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initDeferred);
