@@ -147,72 +147,15 @@
   }
 
   // ---------------------------------------------------------------------
-  // Laptop zoom — a scroll-scrubbed intro (index.html only). ".laptop-zoom"
-  // is a tall wrapper; ".laptop-stage" is sticky inside it, so scrolling
-  // through that extra height drives a progress value from 0 to 1, which
-  // we map straight onto transforms — no autoplay, no scroll-snap, it
-  // tracks the scrollbar exactly and simply stops when you stop scrolling.
-  //   0.00–0.35  the laptop rises into place and the lid opens
-  //   0.35–1.00  the whole rig scales up so the screen fills the frame,
-  //              fading out right at the end to hand off to the section
-  //              underneath (the real comparison content, not a replica
-  //              squeezed into the tiny screen)
+  // Laptop scene — the real 3D laptop (Three.js) lives in lib/laptop-scene.js
+  // and exposes window.initLaptopScene(); it drives itself off the same
+  // scroll-progress idea (".laptop-zoom" tall wrapper, ".laptop-stage"
+  // sticky inside it) but needs WebGL/canvas setup that doesn't belong
+  // mixed in with the rest of this file's DOM-only helpers.
   function initLaptopZoom() {
-    const wrap = document.querySelector('.laptop-zoom');
-    const stage = document.querySelector('.laptop-stage');
-    const rig = document.querySelector('.laptop-rig');
-    const camera = document.querySelector('.laptop-camera');
-    const lid = document.querySelector('.laptop-lid');
-    if (!wrap || !stage || !rig || !camera || !lid) return;
-
-    const OPEN_END = 0.35;
-    let ticking = false;
-
-    function update() {
-      ticking = false;
-      const rect = wrap.getBoundingClientRect();
-      const total = rect.height - window.innerHeight;
-      if (total <= 0) return;
-      const progress = Math.min(1, Math.max(0, -rect.top / total));
-
-      // Stage 1 — the device rises into place, the lid swings open from a
-      // near-flat angle, and the whole rig settles from a dramatic tilt
-      // into a level, slightly 3/4 product-shot angle (the "camera move").
-      const openT = Math.min(1, progress / OPEN_END);
-      const openEased = 1 - Math.pow(1 - openT, 3);
-      const lidAngle = -94 + openEased * 94;
-      const rise = (1 - openEased) * 90;
-      const camRotY = -24 + openEased * 18; // -24deg -> -6deg
-      const camRotZ = 7 - openEased * 7; // 7deg -> 0deg
-
-      // Stage 2 — push in until the screen fills the frame, straightening
-      // out to a dead-on view as it goes, then fade to hand off to the
-      // real content underneath.
-      const zoomT = Math.max(0, (progress - OPEN_END) / (1 - OPEN_END));
-      const zoomEased = zoomT * zoomT;
-      const scale = 1 + zoomEased * 8.5;
-      const zoomRotY = camRotY * (1 - Math.min(1, zoomT * 1.6));
-      const fadeOut = Math.max(0, Math.min(1, (zoomT - 0.82) / 0.18));
-
-      rig.style.opacity = openEased * (1 - fadeOut);
-      rig.style.transform = `translateY(${rise}px) scale(${scale})`;
-      camera.style.transform = `rotateY(${zoomT > 0 ? zoomRotY : camRotY}deg) rotateZ(${camRotZ}deg)`;
-      lid.style.transform = `rotateX(${lidAngle}deg)`;
-
-      const hint = wrap.querySelector('.laptop-hint');
-      if (hint) hint.style.opacity = progress < 0.08 ? 1 : Math.max(0, 1 - progress / 0.3);
+    if (typeof window.initLaptopScene === 'function') {
+      window.initLaptopScene();
     }
-
-    function onScroll() {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(update);
-      }
-    }
-
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
   }
 
   // This <script> tag sits right after the nav, near the top of <body> —

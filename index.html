@@ -43,6 +43,8 @@
     });
   });
 </script>
+<script src="lib/three.min.js"></script>
+<script src="lib/laptop-scene.js"></script>
 <script src="studylock-ui.js"></script>
 
 <div class="hero-pin-wrap">
@@ -57,48 +59,9 @@
 
 <section class="laptop-zoom" id="laptopZoom">
   <div class="laptop-stage">
-    <div class="laptop-shadow"></div>
-    <div class="laptop-rig">
-      <div class="laptop-camera">
-        <div class="laptop-lid">
-          <div class="laptop-screen-bezel">
-            <div class="laptop-camera-dot"></div>
-            <div class="laptop-screen">
-              <div class="browser-chrome">
-                <div class="dots"><span></span><span></span><span></span></div>
-                <div class="tab-bar"><div class="tab active">youtube.com</div></div>
-              </div>
-              <div class="browser-body locked">
-                <div class="site-content">
-                  <h3>YouTube</h3>
-                  <p>Recommended for you</p>
-                  <div class="thumb-grid">
-                    <div class="thumb"></div>
-                    <div class="thumb"></div>
-                    <div class="thumb"></div>
-                  </div>
-                </div>
-                <div class="lock-overlay">
-                  <div class="lock-icon">◆</div>
-                  <h4>Site locked</h4>
-                  <p>Back to work — 18:42 left</p>
-                </div>
-              </div>
-              <div class="laptop-screen-glare"></div>
-            </div>
-          </div>
-        </div>
-        <div class="laptop-base">
-          <div class="laptop-hinge-bar"></div>
-          <div class="laptop-deck">
-            <div class="laptop-keyboard"></div>
-            <div class="laptop-trackpad"></div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <canvas id="laptopCanvas" class="laptop-canvas"></canvas>
+    <p class="laptop-hint">Keep scrolling ↓</p>
   </div>
-  <p class="laptop-hint">Keep scrolling ↓</p>
 </section>
 
 <section class="compare-section" id="why">
