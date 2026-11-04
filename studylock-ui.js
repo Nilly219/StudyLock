@@ -161,8 +161,9 @@
     const wrap = document.querySelector('.laptop-zoom');
     const stage = document.querySelector('.laptop-stage');
     const rig = document.querySelector('.laptop-rig');
+    const camera = document.querySelector('.laptop-camera');
     const lid = document.querySelector('.laptop-lid');
-    if (!wrap || !stage || !rig || !lid) return;
+    if (!wrap || !stage || !rig || !camera || !lid) return;
 
     const OPEN_END = 0.35;
     let ticking = false;
@@ -174,18 +175,28 @@
       if (total <= 0) return;
       const progress = Math.min(1, Math.max(0, -rect.top / total));
 
+      // Stage 1 — the device rises into place, the lid swings open from a
+      // near-flat angle, and the whole rig settles from a dramatic tilt
+      // into a level, slightly 3/4 product-shot angle (the "camera move").
       const openT = Math.min(1, progress / OPEN_END);
       const openEased = 1 - Math.pow(1 - openT, 3);
-      const lidAngle = -92 + openEased * 92;
-      const rise = (1 - openEased) * 70;
+      const lidAngle = -94 + openEased * 94;
+      const rise = (1 - openEased) * 90;
+      const camRotY = -24 + openEased * 18; // -24deg -> -6deg
+      const camRotZ = 7 - openEased * 7; // 7deg -> 0deg
 
+      // Stage 2 — push in until the screen fills the frame, straightening
+      // out to a dead-on view as it goes, then fade to hand off to the
+      // real content underneath.
       const zoomT = Math.max(0, (progress - OPEN_END) / (1 - OPEN_END));
       const zoomEased = zoomT * zoomT;
-      const scale = 1 + zoomEased * 7.5;
+      const scale = 1 + zoomEased * 8.5;
+      const zoomRotY = camRotY * (1 - Math.min(1, zoomT * 1.6));
       const fadeOut = Math.max(0, Math.min(1, (zoomT - 0.82) / 0.18));
 
       rig.style.opacity = openEased * (1 - fadeOut);
       rig.style.transform = `translateY(${rise}px) scale(${scale})`;
+      camera.style.transform = `rotateY(${zoomT > 0 ? zoomRotY : camRotY}deg) rotateZ(${camRotZ}deg)`;
       lid.style.transform = `rotateX(${lidAngle}deg)`;
 
       const hint = wrap.querySelector('.laptop-hint');
