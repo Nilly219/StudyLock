@@ -12,21 +12,32 @@
   --coral-dark: #E2503F;
   --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* Liquid-glass surfaces, tinted warm to match the cream ground */
-  --glass-bg: rgba(244, 237, 224, 0.62);
-  --glass-bg-strong: rgba(244, 237, 224, 0.85);
-  --glass-border: rgba(255, 255, 255, 0.5);
-  --glass-blur: 20px;
+  /* Liquid-glass surfaces, tinted warm to match the cream ground — the
+     "iOS 26" frosted look: blurred, translucent, a hairline of light at
+     the top edge. */
+  --glass-bg: rgba(244, 237, 224, 0.6);
+  --glass-bg-strong: rgba(244, 237, 224, 0.86);
+  --glass-border: rgba(255, 255, 255, 0.55);
+  --glass-blur: 22px;
 
-  /* Type */
-  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  /* Type — headlines in a clean, bold grotesque; the logo deliberately
+     stays on the plain system stack (the "older simple font"). */
+  --font-display: 'Plus Jakarta Sans', var(--font-body);
   --font-body: 'Archivo', -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-logo: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 
-  /* Radius scale — tightened from the old pill/rounded system */
-  --radius-xs: 4px;
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
+  /* Radius scale — tighter than the old pill system, but softened back up
+     a little for the claymorphism pass */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  /* Claymorphism shadow pairs — a soft dark shadow + a soft light
+     highlight, opposite corners, for a puffy/tactile surface */
+  --clay-shadow: 9px 9px 22px rgba(34, 30, 25, 0.14), -7px -7px 18px rgba(255, 255, 255, 0.75);
+  --clay-shadow-sm: 5px 5px 12px rgba(34, 30, 25, 0.12), -4px -4px 10px rgba(255, 255, 255, 0.7);
+  --clay-shadow-inset: inset 2px 2px 5px rgba(34, 30, 25, 0.12), inset -2px -2px 5px rgba(255, 255, 255, 0.6);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -89,9 +100,9 @@ nav {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 18px;
+  font-family: var(--font-logo);
+  font-weight: 700;
+  font-size: 17px;
   text-decoration: none;
 }
 
@@ -161,22 +172,24 @@ nav {
 .btn:hover::before { left: 130%; }
 
 .btn-primary {
-  background: var(--terracotta);
+  background: linear-gradient(160deg, #1B2C4F, var(--terracotta));
   color: #fff;
+  box-shadow: 6px 6px 16px rgba(10, 20, 40, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
-.btn-primary:hover { background: var(--terracotta-dark); box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.5); }
+.btn-primary:hover { background: linear-gradient(160deg, #233A66, var(--terracotta-dark)); box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.22); }
 
 .btn-ghost {
   background: var(--glass-bg);
   backdrop-filter: blur(var(--glass-blur)) saturate(160%);
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
-  border: 1px solid rgba(34, 30, 25, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: var(--clay-shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.5);
   color: var(--ink);
 }
 .btn-ghost:hover { background: var(--glass-bg-strong); border-color: rgba(20, 33, 61, 0.3); }
 
 /* NAV CTA — "StudyL[lock]ck — Coming Soon" wordmark button */
-.wordmark { position: relative; z-index: 2; display: inline-flex; align-items: baseline; font-family: var(--font-display); font-weight: 800; letter-spacing: -0.005em; }
+.wordmark { position: relative; z-index: 2; display: inline-flex; align-items: baseline; font-family: var(--font-logo); font-weight: 700; letter-spacing: -0.005em; }
 .lock-o { display: inline-block; position: relative; line-height: 0; }
 .lock-o svg { position: absolute; left: 0; bottom: 0; display: block; overflow: visible; }
 .btn .suffix { position: relative; z-index: 2; font-family: var(--font-body); font-weight: 500; opacity: 0.85; margin-left: 6px; font-size: 0.82em; }
@@ -205,6 +218,7 @@ header.hero {
   text-transform: uppercase;
   color: var(--terracotta-dark);
   background: var(--terracotta-tint);
+  box-shadow: var(--clay-shadow-sm);
   padding: 5px 12px;
   border-radius: var(--radius-xs);
   margin-bottom: 20px;
@@ -221,8 +235,8 @@ h1 {
 }
 
 h1 em {
-  font-style: italic;
-  font-weight: 500;
+  font-style: normal;
+  font-weight: 800;
   color: var(--coral);
 }
 
@@ -254,9 +268,9 @@ h1 em {
   margin: 0 auto;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   background: var(--card);
-  box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--clay-shadow);
 }
 
 .browser-chrome {
@@ -353,7 +367,8 @@ h1 em {
   width: 52px; height: 52px;
   border-radius: var(--radius-sm);
   background: var(--card);
-  border: 1px solid var(--line);
+  box-shadow: var(--clay-shadow-sm);
+  border: none;
   display: flex; align-items: center; justify-content: center;
   color: var(--terracotta);
   font-size: 22px;
@@ -519,7 +534,8 @@ header.hero .wrap { position: relative; z-index: 1; }
 .compare-col {
   border-radius: var(--radius-md);
   padding: 22px 24px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: var(--clay-shadow-sm);
   transition: transform 0.35s var(--ease-premium), box-shadow 0.35s ease;
 }
 
@@ -581,15 +597,17 @@ header.hero .wrap { position: relative; z-index: 1; }
 
 .feature-card {
   background: var(--card);
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: var(--radius-md);
+  box-shadow: var(--clay-shadow-sm);
   padding: 26px 22px;
 }
 
 .feature-card .ficon {
   width: 40px; height: 40px;
   border-radius: var(--radius-sm);
-  background: var(--terracotta-tint);
+  background: linear-gradient(150deg, var(--terracotta-tint), var(--card));
+  box-shadow: var(--clay-shadow-sm);
   color: var(--terracotta-dark);
   display: flex; align-items: center; justify-content: center;
   font-size: 17px;
@@ -627,12 +645,19 @@ header.hero .wrap { position: relative; z-index: 1; }
 }
 
 .step .num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--card);
+  box-shadow: var(--clay-shadow-sm);
   font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 700;
-  font-style: italic;
+  font-size: 13px;
+  font-weight: 800;
   color: var(--coral);
-  margin-bottom: 10px;
+  margin-bottom: 14px;
 }
 
 .step h4 { font-size: 15px; margin-bottom: 6px; font-weight: 650; }
@@ -640,9 +665,11 @@ header.hero .wrap { position: relative; z-index: 1; }
 
 /* CTA BAND */
 .cta-band {
-  background: var(--terracotta-dark);
+  background: linear-gradient(165deg, #1B2C4F 0%, var(--terracotta-dark) 60%, #060D1A 100%);
   color: var(--cream);
   border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12);
   max-width: 1032px;
   margin: 0 auto 90px;
   padding: 56px 40px;
@@ -686,9 +713,9 @@ footer {
   margin: 0 auto;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   background: var(--card);
-  box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--clay-shadow);
 }
 
 .device-topbar {
@@ -880,8 +907,9 @@ footer {
 
 .founder-card {
   background: var(--card);
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: var(--radius-lg);
+  box-shadow: var(--clay-shadow);
   padding: 40px;
   text-align: center;
 }
@@ -1104,8 +1132,9 @@ footer {
   max-width: 560px;
   margin: 0 auto;
   background: var(--card);
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: var(--radius-lg);
+  box-shadow: var(--clay-shadow);
   padding: 40px;
   text-align: center;
 }
@@ -1172,13 +1201,15 @@ footer {
   background: var(--card);
   border: 1px dashed var(--line);
   border-radius: var(--radius-lg);
+  box-shadow: var(--clay-shadow);
   padding: 50px 36px;
 }
 
 .soon-icon {
   width: 56px; height: 56px;
   border-radius: var(--radius-md);
-  background: var(--terracotta-tint);
+  background: linear-gradient(150deg, var(--terracotta-tint), var(--card));
+  box-shadow: var(--clay-shadow-sm);
   color: var(--terracotta-dark);
   font-size: 24px;
   display: flex; align-items: center; justify-content: center;
