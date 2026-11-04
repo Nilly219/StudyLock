@@ -136,7 +136,7 @@
   // cursor's horizontal position (index.html only; no-op elsewhere).
   // ---------------------------------------------------------------------
   function initHeroGlow() {
-    const hero = document.querySelector('header.hero');
+    const hero = document.querySelector('.hero-pin');
     const glow2 = document.querySelector('.ambient-glow-2');
     if (!hero || !glow2) return;
     hero.addEventListener('pointermove', (e) => {
