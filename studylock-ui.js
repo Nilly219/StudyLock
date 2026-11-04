@@ -2,7 +2,8 @@
 // nav button). The lock's circle is sized to match the actual rendered "o"
 // glyph for the current font/weight (measured via canvas text metrics), so it
 // sits flush in the word with no gap, and the shackle extends above it like
-// the loop on a real padlock.
+// the loop on a real padlock. Font-agnostic by design — works the same
+// whether the wordmark is set in a sans or, as now, a display serif.
 
 (function () {
   function measureGlyphBox(ctx, ch) {
@@ -62,13 +63,13 @@
     });
   }
 
+  // Run once immediately, then again once webfonts finish loading — Fraunces
+  // is a variable font and metrics can shift once it swaps in from the
+  // fallback serif.
   sizeLockGlyphs();
-  // Re-run once webfonts (if any) finish loading, since metrics can shift.
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(sizeLockGlyphs);
   }
-  // Re-run on resize in case responsive font-size rules change the button's
-  // font-size at different breakpoints.
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
