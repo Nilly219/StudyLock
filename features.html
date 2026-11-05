@@ -4,311 +4,162 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Features — StudyLock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap">
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<div class="site-header">
-<div class="wrap">
-  <nav>
-    <a href="index.html" class="brand"><span class="mark">◆</span>StudyLock</a>
-    <div class="nav-links" id="navLinks">
+<header class="site-header" id="siteHeader">
+  <div class="navbar">
+    <a href="index.html" class="brand"><span class="mark"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></span>StudyLock</a>
+    <nav class="nav-pill" id="navPill">
       <a href="index.html">Home</a>
       <a href="features.html" class="active">Features</a>
       <a href="faq.html">FAQ</a>
-      <a href="app.html">App <span class="soon-tag">Soon</span></a>
+      <a href="app.html">App</a>
       <a href="founder.html">Founder</a>
+    </nav>
+    <a href="app.html" class="btn btn-primary nav-cta">Join waitlist <span>&rarr;</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+
+<section class="dark-section page-head">
+  <div class="wrap">
+    <span class="pill-badge"><span class="dot"></span>What's inside</span>
+    <h1>Three parts. Nothing else competing for attention.</h1>
+    <p>A timer, a task list, and a lock that actually holds. That is the whole extension — no dashboards, no streaks, no upsell.</p>
+    <div class="head-ctas">
+      <a href="app.html" class="btn btn-primary">Join the launch waitlist <span>&rarr;</span></a>
+      <a href="faq.html" class="btn btn-outline on-dark">Read the FAQ</a>
     </div>
-    <button id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false">&#9776;</button>
-    <a href="app.html" class="btn btn-primary"><span class="wordmark">StudyL<span class="lock-o"></span>ck</span><span class="suffix">Coming Soon</span></a>
-  </nav>
-</div>
-</div>
-<script>
-  const navToggle = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
-  navToggle.addEventListener('click', () => {
-    const isOpen = navLinks.classList.toggle('open');
-    navToggle.innerHTML = isOpen ? '&#10005;' : '&#9776;';
-    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
-  navLinks.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      navToggle.innerHTML = '&#9776;';
-      navToggle.setAttribute('aria-expanded', 'false');
-    });
-  });
-</script>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="compare-grid" style="margin-bottom:56px;">
+      <div class="compare-sticky reveal">
+        <span class="eyebrow">The three parts</span>
+        <h3>Built to keep one thing in view: your work.</h3>
+      </div>
+      <div style="align-self:center;">
+        <p class="reveal" style="color:var(--ink-soft);font-size:15px;max-width:460px;">Each part is useful on its own. Together they are the reason the session actually finishes.</p>
+      </div>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card reveal spotlight">
+        <div class="preview pv-timer">
+          <div class="ring"><span class="time">25:00</span><span class="left">left</span></div>
+          <div class="presets"><span>15m</span><span class="on">25m</span><span>45m</span><span>60m</span></div>
+          <div class="start">START SESSION</div>
+        </div>
+        <div class="body">
+          <div class="ficon">&#9201;</div><h3>Flexible timer</h3>
+          <p class="desc">Pick 15, 25, 45, or 60 minutes, or set any custom length that fits your session.</p>
+          <p class="foot">Presets cover the usual Pomodoro lengths, and a custom field covers everything else. Pause, resume, or end early — the clock never argues with you.</p>
+        </div>
+      </div>
+      <div class="feature-card reveal spotlight">
+        <div class="preview pv-tasks">
+          <div class="pv-head"><span>Today's tasks</span><span>2/3</span></div>
+          <div class="pv-add"><span>Add a task&hellip;</span><span>+</span></div>
+          <div class="task-row done"><span class="box checked">&#10003;</span>Chapter 4 — Organic Chemistry</div>
+          <div class="task-row done"><span class="box checked">&#10003;</span>Problem set 3</div>
+          <div class="task-row"><span class="box"></span>Rewrite lecture notes</div>
+        </div>
+        <div class="body">
+          <div class="ficon">&#10003;</div><h3>Built-in tasks</h3>
+          <p class="desc">Jot down what you're working on before you start, and check items off as you go.</p>
+          <p class="foot">The list sits beside the timer, so your intention stays visible for the whole session instead of living in a second app you forget to open.</p>
+        </div>
+      </div>
+      <div class="feature-card reveal spotlight">
+        <div class="preview pv-block">
+          <div class="pv-tab"><span class="dot"></span>youtube.com</div>
+          <div class="skel"></div><div class="skel w60"></div>
+          <div class="chips"><div class="c"></div><div class="c"></div><div class="c"></div></div>
+          <div class="lock-mid"><div class="licon">&#128274;</div><div class="lt">Locked in</div><div class="ls">Blocked while your session is active.</div></div>
+        </div>
+        <div class="body">
+          <div class="ficon">&#9670;</div><h3>Real site blocking</h3>
+          <p class="desc">Choose exactly which sites get locked. Nothing loads until your session ends.</p>
+          <p class="foot">Blocking happens at the browser level, so a blocked tab redirects before it can render. No page-level tricks, no flash of content.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-grid">
+      <div class="info-panel reveal">
+        <span class="eyebrow">Permissions, in plain words</span>
+        <h3>It asks for very little, on purpose.</h3>
+        <div class="perm-row"><span class="ok">&#10003;</span><div><strong>Sites you choose to block</strong><span class="d">Read and redirect only on the domains on your list. StudyLock never reads the content of a page.</span></div></div>
+        <div class="perm-row"><span class="ok">&#10003;</span><div><strong>Local storage only</strong><span class="d">Your sessions, tasks, and settings are written to your browser's own storage — never to a server.</span></div></div>
+        <div class="perm-row"><span class="ok">&#10003;</span><div><strong>Runs only while active</strong><span class="d">Outside a session, the extension sits idle. No background tracking, no always-on listener.</span></div></div>
+      </div>
+      <div class="info-panel warm reveal">
+        <span class="eyebrow">What you will not find</span>
+        <h3>No growth features.</h3>
+        <div class="perm-row"><span class="no">&#10005;</span><div><strong>No account, no sign-in screen</strong><span class="d">There's nothing to create and nothing to lose access to.</span></div></div>
+        <div class="perm-row"><span class="no">&#10005;</span><div><strong>No analytics or tracking pixels</strong><span class="d">Nothing phones home to measure how often you use it.</span></div></div>
+        <div class="perm-row"><span class="no">&#10005;</span><div><strong>No streaks, no notifications</strong><span class="d">Nothing designed to pull you back in when you'd rather be studying.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="cta-band reveal">
+      <div class="left">
+        <span class="eyebrow">Launching soon</span>
+        <h2>Your next study session starts in one click.</h2>
+        <p>Free, local, and ready in under a minute. Leave your email and you'll get one message the day it becomes installable — nothing else.</p>
+        <ul class="check-list">
+          <li><span class="ck">&#10003;</span>Free on Chrome and Brave</li>
+          <li><span class="ck">&#10003;</span>No account, no server</li>
+          <li><span class="ck">&#10003;</span>Your data stays in the browser</li>
+        </ul>
+      </div>
+      <form class="waitlist-form" data-waitlist-form action="https://formspree.io/f/xwlekrgl" method="POST">
+        <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off">
+        <div class="field-row">
+          <div><label for="name2">Name</label><input type="text" id="name2" name="name" placeholder="Optional"></div>
+          <div><label for="email2">Email</label><input type="email" id="email2" name="email" placeholder="you@school.edu" required></div>
+        </div>
+        <label for="msg2">What would you want in the app? <span class="char-count-label"></span></label>
+        <textarea id="msg2" name="message" maxlength="500" placeholder="Quiz modes, flashcard imports, a subject you want covered — whatever you'd actually use."></textarea>
+        <div class="char-count"><span class="cur">0</span>/500</div>
+        <div class="submit-row">
+          <button type="submit" class="btn btn-primary">Join the waitlist <span>&rarr;</span></button>
+          <span class="fine">One email when it launches. No newsletter.</span>
+        </div>
+        <div class="form-status"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand"><span class="mark"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></span>StudyLock</div>
+        <p>A study timer that actually locks you in. Free, local, and built for people who study on their own browser.</p>
+        <a href="app.html" class="btn btn-primary">Join the launch waitlist <span>&rarr;</span></a>
+        <div class="footer-tags"><span>Chrome</span><span>Brave</span><span>No account</span><span>Local only</span></div>
+      </div>
+      <div class="footer-col"><h5>Pages</h5><a href="index.html">Home</a><a href="features.html">Features</a><a href="faq.html">FAQ</a></div>
+      <div class="footer-col"><h5>More</h5><a href="app.html">App</a><a href="founder.html">Founder</a></div>
+    </div>
+    <div class="footer-wordmark">StudyLock<span class="dot"></span></div>
+    <div class="footer-bottom"><span>&copy; 2026 StudyLock</span><span>Built for people who study on their own browser.</span></div>
+  </div>
+</footer>
+
 <script src="studylock-ui.js"></script>
-
-<div class="page-header">
-  <div class="wrap">
-    <span class="eyebrow">See it in motion</span>
-    <h1>Everything StudyLock does, in action.</h1>
-    <p>Three small demos, playing on loop — no need to click anything.</p>
-  </div>
-</div>
-
-<!-- TIMER DEMO -->
-<section class="demo-block reveal">
-  <div class="wrap">
-    <div class="demo-block-head">
-      <h3>⏱ Flexible timer</h3>
-      <p>Pick a preset or set a custom length — the session starts the moment you click.</p>
-    </div>
-    <div class="device-frame">
-      <div class="device-topbar">Timer</div>
-      <div class="device-stage" id="timerStage">
-        <div id="timerDisplayMini" class="mini-timer-display">25:00</div>
-        <div class="mini-preset-row">
-          <button class="mini-preset-btn" data-m="15">15m</button>
-          <button class="mini-preset-btn active" data-m="25">25m</button>
-          <button class="mini-preset-btn" data-m="45">45m</button>
-          <button class="mini-preset-btn" data-m="60">60m</button>
-        </div>
-        <div style="display:flex; justify-content:center; margin-top:16px;">
-          <button id="timerStartBtn" class="btn btn-primary">Start session</button>
-        </div>
-        <div class="fake-cursor" id="timerCursor">
-          <svg viewBox="0 0 24 24"><path d="M4 2L4 20L9 15.5L12.5 22L15 20.5L11.5 14H18L4 2Z" fill="#1D1D1F" stroke="white" stroke-width="1"/></svg>
-        </div>
-        <div class="click-ring" id="timerRing"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TASKS DEMO -->
-<section class="demo-block reveal">
-  <div class="wrap">
-    <div class="demo-block-head">
-      <h3>✓ Built-in tasks</h3>
-      <p>Add what you're working on before the session starts, and check it off as you go.</p>
-    </div>
-    <div class="device-frame">
-      <div class="device-topbar">Tasks</div>
-      <div class="device-stage" id="tasksStage">
-        <div class="mini-task-input-row">
-          <input id="tasksInputMini" class="mini-task-input" type="text" placeholder="Add a task..." readonly />
-          <button id="tasksAddBtn" class="mini-add-btn">+</button>
-        </div>
-        <ul id="tasksListMini" class="mini-task-list"></ul>
-        <div class="fake-cursor" id="tasksCursor">
-          <svg viewBox="0 0 24 24"><path d="M4 2L4 20L9 15.5L12.5 22L15 20.5L11.5 14H18L4 2Z" fill="#1D1D1F" stroke="white" stroke-width="1"/></svg>
-        </div>
-        <div class="click-ring" id="tasksRing"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SITE BLOCKING DEMO -->
-<section class="demo-block reveal">
-  <div class="wrap">
-    <div class="demo-block-head">
-      <h3>◆ Real site blocking</h3>
-      <p>Start a session and chosen sites redirect instantly — nothing loads until it ends.</p>
-    </div>
-    <div class="device-frame">
-      <div class="device-topbar">Site Blocking · youtube.com</div>
-      <div class="device-stage" id="blockStage" style="padding:0;">
-        <div class="browser-body" id="blockBody" style="min-height:220px;">
-          <div class="site-content">
-            <h3>Recommended for you</h3>
-            <p>youtube.com</p>
-            <div class="thumb-grid">
-              <div class="thumb"></div><div class="thumb"></div><div class="thumb"></div>
-            </div>
-          </div>
-          <div class="lock-overlay">
-            <div class="lock-icon">◆</div>
-            <h4>Locked in</h4>
-            <p>Blocked while your session is active.</p>
-          </div>
-        </div>
-        <div style="display:flex; justify-content:center; padding:18px;">
-          <button id="blockStartBtn" class="btn btn-primary">Start session</button>
-        </div>
-        <div class="fake-cursor" id="blockCursor">
-          <svg viewBox="0 0 24 24"><path d="M4 2L4 20L9 15.5L12.5 22L15 20.5L11.5 14H18L4 2Z" fill="#1D1D1F" stroke="white" stroke-width="1"/></svg>
-        </div>
-        <div class="click-ring" id="blockRing"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="wrap">
-  <div class="cta-band reveal">
-    <h2>That's the whole app — simple on purpose.</h2>
-    <p>Add it to your browser and try it on your next study session.</p>
-    <a href="app.html" class="btn btn-primary"><span class="wordmark">StudyL<span class="lock-o"></span>ck</span><span class="suffix">Coming Soon</span></a>
-  </div>
-</div>
-
-<div class="wrap">
-  <footer>
-    <div class="brand"><span class="mark">◆</span>StudyLock</div>
-    <span>Built for people who study on their own browser.</span>
-  </footer>
-</div>
-
-<script>
-  function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
-
-  function getCenter(el, stage) {
-    const r = el.getBoundingClientRect();
-    const s = stage.getBoundingClientRect();
-    return { x: r.left - s.left + r.width / 2, y: r.top - s.top + r.height / 2 };
-  }
-
-  function placeCursor(cursor, x, y) {
-    cursor.style.left = (x - 2) + 'px';
-    cursor.style.top = (y - 2) + 'px';
-  }
-
-  async function moveTo(cursor, el, stage) {
-    const c = getCenter(el, stage);
-    placeCursor(cursor, c.x, c.y);
-    await sleep(650);
-    return c;
-  }
-
-  function ringAt(ring, x, y) {
-    ring.style.left = x + 'px';
-    ring.style.top = y + 'px';
-    ring.classList.remove('pulse');
-    void ring.offsetWidth;
-    ring.classList.add('pulse');
-  }
-
-  // Fires fn once, the first time stage scrolls into view — never again after.
-  function playOnceInView(stage, fn) {
-    let played = false;
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !played) {
-          played = true;
-          fn();
-          io.unobserve(stage);
-        }
-      });
-    }, { threshold: 0.45 });
-    io.observe(stage);
-  }
-
-  // ---- Timer demo (single pass) ----
-  async function runTimerDemo() {
-    const stage = document.getElementById('timerStage');
-    const cursor = document.getElementById('timerCursor');
-    const ring = document.getElementById('timerRing');
-    const presets = stage.querySelectorAll('.mini-preset-btn');
-    const preset45 = stage.querySelector('[data-m="45"]');
-    const startBtn = document.getElementById('timerStartBtn');
-    const display = document.getElementById('timerDisplayMini');
-
-    placeCursor(cursor, 300, 40);
-    await sleep(600);
-    const c1 = await moveTo(cursor, preset45, stage);
-    ringAt(ring, c1.x, c1.y);
-    presets.forEach((b) => b.classList.remove('active'));
-    preset45.classList.add('active');
-    display.textContent = '45:00';
-    await sleep(500);
-
-    const c2 = await moveTo(cursor, startBtn, stage);
-    ringAt(ring, c2.x, c2.y);
-    startBtn.classList.add('btn-pressed');
-    await sleep(180);
-    startBtn.classList.remove('btn-pressed');
-    startBtn.textContent = 'Session active';
-
-    const ticks = ['44:59', '44:58', '44:57', '44:56'];
-    for (const t of ticks) {
-      await sleep(280);
-      display.textContent = t;
-    }
-    await sleep(400);
-    cursor.style.opacity = '0';
-  }
-
-  // ---- Tasks demo (single pass) ----
-  async function runTasksDemo() {
-    const stage = document.getElementById('tasksStage');
-    const cursor = document.getElementById('tasksCursor');
-    const ring = document.getElementById('tasksRing');
-    const input = document.getElementById('tasksInputMini');
-    const addBtn = document.getElementById('tasksAddBtn');
-    const list = document.getElementById('tasksListMini');
-    const text = 'Finish chem worksheet';
-
-    placeCursor(cursor, 300, 30);
-    await sleep(600);
-
-    const c1 = await moveTo(cursor, input, stage);
-    ringAt(ring, c1.x, c1.y);
-    input.classList.add('typing');
-    for (let i = 0; i <= text.length; i++) {
-      input.value = text.slice(0, i);
-      await sleep(35);
-    }
-    await sleep(300);
-
-    const c2 = await moveTo(cursor, addBtn, stage);
-    ringAt(ring, c2.x, c2.y);
-    addBtn.classList.add('btn-pressed');
-    await sleep(150);
-    addBtn.classList.remove('btn-pressed');
-    input.classList.remove('typing');
-    input.value = '';
-
-    const li = document.createElement('li');
-    const check = document.createElement('span');
-    check.className = 'mini-check';
-    const span = document.createElement('span');
-    span.textContent = text;
-    li.appendChild(check);
-    li.appendChild(span);
-    list.appendChild(li);
-    await sleep(50);
-    li.classList.add('shown');
-
-    await sleep(700);
-    const c3 = await moveTo(cursor, check, stage);
-    ringAt(ring, c3.x, c3.y);
-    check.classList.add('checked');
-    li.classList.add('done');
-    await sleep(400);
-    cursor.style.opacity = '0';
-  }
-
-  // ---- Site blocking demo (single pass) ----
-  async function runBlockDemo() {
-    const stage = document.getElementById('blockStage');
-    const cursor = document.getElementById('blockCursor');
-    const ring = document.getElementById('blockRing');
-    const startBtn = document.getElementById('blockStartBtn');
-    const bodyEl = document.getElementById('blockBody');
-
-    placeCursor(cursor, 300, 40);
-    await sleep(700);
-
-    const c1 = await moveTo(cursor, startBtn, stage);
-    ringAt(ring, c1.x, c1.y);
-    startBtn.classList.add('btn-pressed');
-    await sleep(150);
-    startBtn.classList.remove('btn-pressed');
-    bodyEl.classList.add('locked');
-    startBtn.textContent = 'Session active';
-    await sleep(400);
-    cursor.style.opacity = '0';
-  }
-
-  playOnceInView(document.getElementById('timerStage'), runTimerDemo);
-  playOnceInView(document.getElementById('tasksStage'), runTasksDemo);
-  playOnceInView(document.getElementById('blockStage'), runBlockDemo);
-</script>
-
 </body>
 </html>

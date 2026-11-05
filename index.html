@@ -11,65 +11,161 @@
 </head>
 <body>
 
-<div class="site-header">
-<div class="wrap">
-  <nav>
-    <a href="index.html" class="brand"><span class="mark">◆</span>StudyLock</a>
-    <div class="nav-links" id="navLinks">
+<header class="site-header" id="siteHeader">
+  <div class="navbar">
+    <a href="index.html" class="brand"><span class="mark"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></span>StudyLock</a>
+    <nav class="nav-pill" id="navPill">
       <a href="index.html" class="active">Home</a>
       <a href="features.html">Features</a>
       <a href="faq.html">FAQ</a>
-      <a href="app.html">App <span class="soon-tag">Soon</span></a>
+      <a href="app.html">App</a>
       <a href="founder.html">Founder</a>
-    </div>
-    <button id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false">&#9776;</button>
-    <a href="app.html" class="btn btn-primary"><span class="wordmark">StudyL<span class="lock-o"></span>ck</span><span class="suffix">Coming Soon</span></a>
-  </nav>
-</div>
-</div>
-<script>
-  const navToggle = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
-  navToggle.addEventListener('click', () => {
-    const isOpen = navLinks.classList.toggle('open');
-    navToggle.innerHTML = isOpen ? '&#10005;' : '&#9776;';
-    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
-  navLinks.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      navToggle.innerHTML = '&#9776;';
-      navToggle.setAttribute('aria-expanded', 'false');
-    });
-  });
-</script>
-<script src="lib/three.min.js"></script>
-<script src="lib/laptop-scene.js"></script>
-<script src="studylock-ui.js"></script>
+    </nav>
+    <a href="app.html" class="btn btn-primary nav-cta">Join waitlist <span>&rarr;</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
 
-<div class="hero-pin-wrap">
-  <header class="hero-pin">
-    <div class="ambient-glow"></div>
-    <div class="ambient-glow-2"></div>
-    <div class="wrap">
-      <h1>A study timer that <em>actually</em> locks you in.</h1>
+<section class="dark-section hero">
+  <div class="wrap">
+    <div class="badge-row reveal">
+      <span class="pill-badge"><span class="dot"></span>CHROME &amp; BRAVE EXTENSION</span>
+      <span class="pill-badge filled">LAUNCHING SOON</span>
     </div>
-  </header>
-</div>
-
-<section class="laptop-zoom" id="laptopZoom">
-  <div class="laptop-stage">
-    <canvas id="laptopCanvas" class="laptop-canvas"></canvas>
-    <p class="laptop-hint">Keep scrolling ↓</p>
+    <h1 class="reveal">A study timer that <em>actually</em> locks you in.</h1>
+    <p class="sub reveal">A timer, a task list and real site blocking — all in one small popup that stays out of your way. Watch the laptop below turn: one full circle, one feature on screen, three times.</p>
+    <div class="hero-ctas reveal">
+      <a href="app.html" class="btn btn-primary">Join the launch waitlist <span>&rarr;</span></a>
+      <a href="#whats-inside" class="btn btn-outline on-dark">See what's inside</a>
+    </div>
+    <p class="scroll-hint reveal">&darr; Scroll once to hold the laptop still</p>
   </div>
 </section>
 
-<section class="compare-section" id="why">
+<section class="fact-strip">
   <div class="wrap">
-    <div class="compare-intro reveal">
+    <div class="fact"><span class="k">Price</span><span class="v">Free — no trial, no paywall</span></div>
+    <div class="fact"><span class="k">Browsers</span><span class="v">Chrome &amp; Brave</span></div>
+    <div class="fact"><span class="k">Your data</span><span class="v">Stored locally, never sent</span></div>
+  </div>
+</section>
+
+<section class="laptop-section">
+  <div class="laptop-pin-wrap" id="laptopPinWrap">
+    <div class="laptop-stage">
+      <div class="wrap">
+        <div class="copy">
+          <span class="eyebrow on-dark">&bull; See it in motion</span>
+          <h2>Everything it does, in one popup.</h2>
+          <p class="lede">The page holds still here. Keep scrolling and the laptop turns a full circle, stops on a feature, turns again — three turns, one per feature, then you carry on down.</p>
+
+          <div class="turn-list" id="turnList">
+            <div class="turn-item active" data-turn="0">
+              <div class="t-left">
+                <div>
+                  <span class="t-num">01</span>
+                  <div class="t-name">Flexible timer</div>
+                  <div class="t-sub">25:00 — Organic Chemistry</div>
+                </div>
+              </div>
+              <span>&#8599;</span>
+            </div>
+            <div class="turn-item" data-turn="1">
+              <div class="t-left">
+                <div>
+                  <span class="t-num">02</span>
+                  <div class="t-name">Built-in tasks</div>
+                  <div class="t-sub">2 of 3 tasks checked off</div>
+                </div>
+              </div>
+              <span>&#8599;</span>
+            </div>
+            <div class="turn-item" data-turn="2">
+              <div class="t-left">
+                <div>
+                  <span class="t-num">03</span>
+                  <div class="t-name">Real site blocking</div>
+                  <div class="t-sub">5 sites locked while active</div>
+                </div>
+              </div>
+              <span>&#8599;</span>
+            </div>
+          </div>
+
+          <div class="turn-progress" id="turnProgress">
+            <span class="dash done" data-dash="0"></span>
+            <span class="dash" data-dash="1"></span>
+            <span class="dash" data-dash="2"></span>
+            <span class="label" id="turnLabel">Turn 1 of 3</span>
+          </div>
+          <p class="laptop-hint">&#8635; Scroll to turn the laptop &middot; the screen is live — click the presets and tasks</p>
+          <p class="laptop-replay" id="laptopReplay">&#8635; Replay the turns</p>
+        </div>
+
+        <div class="laptop-3d-viewport">
+          <div class="laptop-3d" id="laptop3d">
+            <div class="lp-lid-pivot" id="lpLidPivot">
+              <div class="lp-lid">
+                <div class="lp-screen-back"></div>
+                <div class="lp-screen-bezel">
+                  <div class="lp-screen" id="lpScreen">
+                    <div style="display:flex;flex-direction:column;height:100%;font-family:var(--font-body);">
+                      <div style="display:flex;align-items:center;gap:6px;padding:7px 10px;background:#f4ede0;color:#14182a;font-size:9px;">
+                        <span style="width:6px;height:6px;border-radius:50%;background:#e2967f;"></span>
+                        <span style="font-weight:700;">StudyLock</span>
+                        <span style="flex:1;background:#fff;border-radius:999px;padding:3px 8px;color:#8b8f9c;font-size:8px;">studylock.app — session active</span>
+                        <span id="lpTabLabel" style="font-size:7.5px;color:#bc6151;font-weight:700;">03 REAL SITE BLOCKING</span>
+                      </div>
+                      <div style="flex:1;display:grid;grid-template-columns:1.1fr 1fr;gap:1px;background:var(--navy-line);overflow:hidden;">
+                        <div id="lpLeftPane" style="background:var(--navy-deep);padding:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;transition:box-shadow .3s ease;">
+                          <div style="width:62px;height:62px;border-radius:50%;border:5px solid #1c2440;border-top-color:#d2725f;border-right-color:#d2725f;display:flex;align-items:center;justify-content:center;flex-direction:column;">
+                            <span style="font-size:11px;font-weight:700;color:#f4ede0;">20:20</span>
+                          </div>
+                          <div style="display:flex;gap:3px;" id="lpPresets">
+                            <span class="lp-preset" data-preset="15m" style="padding:2px 6px;border-radius:999px;font-size:6.5px;color:#9ba3ba;border:1px solid var(--navy-line);cursor:pointer;">15m</span>
+                            <span class="lp-preset on" data-preset="25m" style="padding:2px 6px;border-radius:999px;font-size:6.5px;background:#d2725f;color:#1b0d08;font-weight:700;cursor:pointer;">25m</span>
+                            <span class="lp-preset" data-preset="45m" style="padding:2px 6px;border-radius:999px;font-size:6.5px;color:#9ba3ba;border:1px solid var(--navy-line);cursor:pointer;">45m</span>
+                          </div>
+                        </div>
+                        <div id="lpRightPane" style="background:var(--navy-deep);padding:8px;font-size:7px;color:#f4ede0;transition:box-shadow .3s ease;">
+                          <div style="display:flex;justify-content:space-between;color:#9ba3ba;margin-bottom:5px;text-transform:uppercase;letter-spacing:.06em;font-size:6px;">Today's tasks<span>2/3</span></div>
+                          <div class="lp-task" data-task="0" style="display:flex;gap:4px;align-items:center;margin-bottom:3px;text-decoration:line-through;color:#6b7184;cursor:pointer;"><span style="width:7px;height:7px;border-radius:2px;background:#d2725f;flex-shrink:0;"></span>Chapter 4 — Organic Chemistry</div>
+                          <div class="lp-task" data-task="1" style="display:flex;gap:4px;align-items:center;margin-bottom:3px;text-decoration:line-through;color:#6b7184;cursor:pointer;"><span style="width:7px;height:7px;border-radius:2px;background:#d2725f;flex-shrink:0;"></span>Problem set 3</div>
+                          <div class="lp-task" data-task="2" style="display:flex;gap:4px;align-items:center;margin-bottom:8px;cursor:pointer;"><span style="width:7px;height:7px;border-radius:2px;border:1px solid var(--navy-line);flex-shrink:0;"></span>Rewrite lecture notes</div>
+                          <div id="lpLockBox" style="border-top:1px solid var(--navy-line);padding-top:6px;">
+                            <div style="color:#e2967f;font-size:5.8px;letter-spacing:.06em;margin-bottom:4px;">&#128274; LOCKED WHILE ACTIVE</div>
+                            <div style="display:flex;flex-wrap:wrap;gap:3px;">
+                              <span style="border:1px solid var(--navy-line);border-radius:999px;padding:2px 5px;font-size:5.5px;color:#9ba3ba;">youtube.com</span>
+                              <span style="border:1px solid var(--navy-line);border-radius:999px;padding:2px 5px;font-size:5.5px;color:#9ba3ba;">instagram.com</span>
+                              <span style="border:1px solid var(--navy-line);border-radius:999px;padding:2px 5px;font-size:5.5px;color:#9ba3ba;">tiktok.com</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="lp-base">
+              <div class="lp-base-top"></div>
+              <div class="lp-keyboard" id="lpKeyboard"></div>
+              <div class="lp-trackpad"></div>
+              <div class="lp-base-front"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="why">
+  <div class="wrap">
+    <div class="section-intro reveal">
       <span class="eyebrow">Why StudyLock</span>
       <h2>Most tools do one part of this. Almost none do all three.</h2>
-      <p>Timers, task lists, and site blockers usually ship as separate apps that don't talk to each other. Here's what that actually costs you — and what changes when they're one thing.</p>
+      <p>Timers, task lists, and site blockers usually ship as separate apps that don't talk to each other. Here's what that costs you — and what changes when they're one thing.</p>
     </div>
 
     <div class="compare-grid">
@@ -77,61 +173,33 @@
         <span class="eyebrow">The comparison</span>
         <h3>What most focus tools get wrong.</h3>
         <p>Scroll through — each one is a small gap that adds up to you closing the app within a week.</p>
-        <span class="divider-line"></span>
       </div>
 
       <div class="compare-rows">
         <div class="compare-row reveal">
-          <div class="compare-col others spotlight">
-            <span class="tag">✕ Most blockers</span>
-            <p>Block sites, but have no idea what you're supposed to be working on instead.</p>
-          </div>
-          <div class="compare-col ours spotlight">
-            <span class="tag">◆ StudyLock</span>
-            <p>Bundles a task list into the same popup — you set your work and your lock in one motion.</p>
-          </div>
+          <div class="compare-col others spotlight"><span class="tag">&#10005; Most blockers</span><p>Block sites, but have no idea what you're supposed to be working on instead.</p></div>
+          <div class="compare-col ours spotlight"><span class="tag">&#9670; StudyLock</span><p>Bundles a task list into the same popup — you set your work and your lock in one motion.</p></div>
         </div>
-
         <div class="compare-row reveal">
-          <div class="compare-col others spotlight">
-            <span class="tag">✕ Most timers</span>
-            <p>Count down quietly in a tab. Nothing stops you from opening a new one and scrolling anyway.</p>
-          </div>
-          <div class="compare-col ours spotlight">
-            <span class="tag">◆ StudyLock</span>
-            <p>Actually redirects blocked sites at the browser level — the tab loads, then goes nowhere.</p>
-          </div>
+          <div class="compare-col others spotlight"><span class="tag">&#10005; Most timers</span><p>Count down quietly in a tab. Nothing stops you from opening a new one and scrolling anyway.</p></div>
+          <div class="compare-col ours spotlight"><span class="tag">&#9670; StudyLock</span><p>Actually redirects blocked sites at the browser level — the tab loads, then goes nowhere.</p></div>
         </div>
-
         <div class="compare-row reveal">
-          <div class="compare-col others spotlight">
-            <span class="tag">✕ Most focus apps</span>
-            <p>Want an account, sync your activity to a server, sometimes sell that data on.</p>
-          </div>
-          <div class="compare-col ours spotlight">
-            <span class="tag">◆ StudyLock</span>
-            <p>No login, no server. Your sessions and tasks stay stored locally, on your device only.</p>
-          </div>
+          <div class="compare-col others spotlight"><span class="tag">&#10005; Most focus apps</span><p>Want an account, sync your activity to a server, sometimes sell that data on.</p></div>
+          <div class="compare-col ours spotlight"><span class="tag">&#9670; StudyLock</span><p>No login, no server. Your sessions and tasks stay stored locally, on your device only.</p></div>
         </div>
-
         <div class="compare-row reveal">
-          <div class="compare-col others spotlight">
-            <span class="tag">✕ Most extensions</span>
-            <p>Bury the one setting you want under menus, or ask for permissions that don't add up.</p>
-          </div>
-          <div class="compare-col ours spotlight">
-            <span class="tag">◆ StudyLock</span>
-            <p>Three things, done well: a timer, a task list, a lock. Nothing else competing for your attention.</p>
-          </div>
+          <div class="compare-col others spotlight"><span class="tag">&#10005; Most extensions</span><p>Bury the one setting you want under menus, or ask for permissions that don't add up.</p></div>
+          <div class="compare-col ours spotlight"><span class="tag">&#9670; StudyLock</span><p>Three things, done well: a timer, a task list, a lock. Nothing else competing for your attention.</p></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="features">
+<section class="section" id="whats-inside" style="padding-top:0;">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="section-intro reveal">
       <span class="eyebrow">What's inside</span>
       <h2>Built to keep one thing in view: your work.</h2>
       <p>Three parts, no clutter — a timer, a task list, and a lock that actually holds.</p>
@@ -139,65 +207,162 @@
 
     <div class="feature-grid">
       <div class="feature-card reveal spotlight">
-        <div class="ficon">⏱</div>
-        <h3>Flexible timer</h3>
-        <p>Pick 15, 25, 45, or 60 minutes, or set any custom length that fits your session.</p>
+        <div class="preview pv-timer">
+          <div class="ring"><span class="time">25:00</span><span class="left">left</span></div>
+          <div class="presets"><span>15m</span><span class="on">25m</span><span>45m</span><span>60m</span></div>
+          <div class="start">START SESSION</div>
+        </div>
+        <div class="body"><div class="ficon">&#9201;</div><h3>Flexible timer</h3><p class="desc">Pick 15, 25, 45, or 60 minutes, or set any custom length that fits your session.</p></div>
       </div>
       <div class="feature-card reveal spotlight">
-        <div class="ficon">✓</div>
-        <h3>Built-in tasks</h3>
-        <p>Jot down what you're working on before you start, and check items off as you go.</p>
+        <div class="preview pv-tasks">
+          <div class="pv-head"><span>Today's tasks</span><span>2/3</span></div>
+          <div class="pv-add"><span>Add a task&hellip;</span><span>+</span></div>
+          <div class="task-row done"><span class="box checked">&#10003;</span>Chapter 4 — Organic Chemistry</div>
+          <div class="task-row done"><span class="box checked">&#10003;</span>Problem set 3</div>
+          <div class="task-row"><span class="box"></span>Rewrite lecture notes</div>
+        </div>
+        <div class="body"><div class="ficon">&#10003;</div><h3>Built-in tasks</h3><p class="desc">Jot down what you're working on before you start, and check items off as you go.</p></div>
       </div>
       <div class="feature-card reveal spotlight">
-        <div class="ficon">◆</div>
-        <h3>Real site blocking</h3>
-        <p>Choose exactly which sites get locked. Nothing loads until your session ends.</p>
+        <div class="preview pv-block">
+          <div class="pv-tab"><span class="dot"></span>youtube.com</div>
+          <div class="skel"></div><div class="skel w60"></div>
+          <div class="chips"><div class="c"></div><div class="c"></div><div class="c"></div></div>
+          <div class="lock-mid"><div class="licon">&#128274;</div><div class="lt">Locked in</div><div class="ls">Blocked while your session is active.</div></div>
+        </div>
+        <div class="body"><div class="ficon">&#9670;</div><h3>Real site blocking</h3><p class="desc">Choose exactly which sites get locked. Nothing loads until your session ends.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="steps">
+<section class="section" style="padding-top:0;">
   <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">How it works</span>
-      <h2>Three steps. That's it.</h2>
+    <div class="section-intro reveal">
+      <span class="eyebrow">A preview, not the product</span>
+      <h2>How studying will work inside it.</h2>
+      <p>These two panels are a working sketch of the flow: answer a question, get graded on meaning rather than exact wording, then turn your notes into cards.</p>
     </div>
-
-    <div class="step-row">
-      <div class="step reveal">
-        <div class="num">01</div>
-        <h4>Install the extension</h4>
-        <p>Add StudyLock to Chrome or Brave in under a minute — no account needed.</p>
+    <div class="ai-grid">
+      <div class="ai-card reveal">
+        <div class="ai-head"><span>AI Study &middot; Chem Unit 4</span><span class="tag">&#10022; Preview</span></div>
+        <div class="q">What is the powerhouse of the cell?</div>
+        <div class="answer-row"><span class="answer-field">Type your answer&hellip;</span><span class="send">&rarr;</span></div>
+        <div class="ai-foot"><span class="hint">&#128161; Ask AI for a hint</span><span>Not quite</span></div>
       </div>
-      <div class="step reveal">
-        <div class="num">02</div>
-        <h4>Set your session</h4>
-        <p>Pick a preset or enter a custom time, then add whatever you're working on to the task list.</p>
-      </div>
-      <div class="step reveal">
-        <div class="num">03</div>
-        <h4>Stay locked in</h4>
-        <p>Your blocked sites redirect automatically until the timer runs out — no willpower required.</p>
+      <div class="ai-card reveal">
+        <div class="ai-head"><span>Upload &amp; generate</span></div>
+        <div class="drop"><div class="up">&#8679;</div>Drop a file here, or tap to use Bio_Notes.pdf<div class="types">PDF &middot; DOCX &middot; MD</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="wrap">
-  <div class="cta-band reveal">
-    <h2>Your next study session starts in one click.</h2>
-    <p>Free, local, and ready in under a minute.</p>
-    <a href="app.html" class="btn btn-primary"><span class="wordmark">StudyL<span class="lock-o"></span>ck</span><span class="suffix">Coming Soon</span></a>
+<section class="section steps-dark">
+  <div class="wrap">
+    <div class="steps-head">
+      <div>
+        <span class="eyebrow on-dark">How it works</span>
+        <h2>Three steps.<br>That's it.</h2>
+      </div>
+      <p>No onboarding flow, no setup wizard. Install it, choose your time, and start.</p>
+    </div>
+    <div class="step-grid">
+      <div class="step-card reveal"><div class="snum">01<span class="ln"></span><span class="arrow">&rarr;</span></div><h4>Install the extension</h4><p>Add StudyLock to Chrome or Brave in under a minute — no account needed.</p></div>
+      <div class="step-card reveal"><div class="snum">02<span class="ln"></span><span class="arrow">&rarr;</span></div><h4>Set your session</h4><p>Pick a preset or enter a custom time, then add whatever you are working on to the task list.</p></div>
+      <div class="step-card reveal"><div class="snum">03<span class="ln"></span><span class="arrow">&rarr;</span></div><h4>Stay locked in</h4><p>Your blocked sites redirect automatically until the timer runs out — no willpower required.</p></div>
+    </div>
+    <div class="steps-foot">
+      <span>Free &middot; No account &middot; Local only</span>
+      <a href="faq.html">Read the questions people ask first &rarr;</a>
+    </div>
   </div>
-</div>
+</section>
 
-<div class="wrap">
-  <footer>
-    <div class="brand"><span class="mark">◆</span>StudyLock</div>
-    <span>Built for people who study on their own browser.</span>
-  </footer>
-</div>
+<section class="section">
+  <div class="wrap">
+    <div class="quick-grid">
+      <a class="quick-card reveal" href="features.html">
+        <div class="qtop"><div class="qicon">&#9201;</div><span class="qarrow">&#8599;</span></div>
+        <span class="qlabel">Features</span>
+        <strong>What is actually in the popup</strong>
+        <p>The timer, the task list, the lock — with a live preview of each.</p>
+      </a>
+      <a class="quick-card reveal" href="faq.html">
+        <div class="qtop"><div class="qicon">?</div><span class="qarrow">&#8599;</span></div>
+        <span class="qlabel">FAQ</span>
+        <strong>The eight questions people ask</strong>
+        <p>Permissions, Brave support, what happens if you close the browser.</p>
+      </a>
+      <a class="quick-card reveal" href="founder.html">
+        <div class="qtop"><div class="qicon">&#9679;</div><span class="qarrow">&#8599;</span></div>
+        <span class="qlabel">Founder</span>
+        <strong>Why this exists at all</strong>
+        <p>A note from the student who kept losing twenty minutes to YouTube.</p>
+      </a>
+    </div>
+  </div>
+</section>
 
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="cta-band reveal">
+      <div class="left">
+        <span class="eyebrow">Launching soon</span>
+        <h2>Your next study session starts in one click.</h2>
+        <p>Free, local, and ready in under a minute. Leave your email and you'll get one message the day it becomes installable — nothing else.</p>
+        <ul class="check-list">
+          <li><span class="ck">&#10003;</span>Free on Chrome and Brave</li>
+          <li><span class="ck">&#10003;</span>No account, no server</li>
+          <li><span class="ck">&#10003;</span>Your data stays in the browser</li>
+        </ul>
+      </div>
+      <form class="waitlist-form" data-waitlist-form action="https://formspree.io/f/xwlekrgl" method="POST">
+        <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off">
+        <div class="field-row">
+          <div><label for="name1">Name</label><input type="text" id="name1" name="name" placeholder="Optional"></div>
+          <div><label for="email1">Email</label><input type="email" id="email1" name="email" placeholder="you@school.edu" required></div>
+        </div>
+        <label for="msg1">What would you want in the app? <span class="char-count-label"></span></label>
+        <textarea id="msg1" name="message" maxlength="500" placeholder="Quiz modes, flashcard imports, a subject you want covered — whatever you'd actually use."></textarea>
+        <div class="char-count"><span class="cur">0</span>/500</div>
+        <div class="submit-row">
+          <button type="submit" class="btn btn-primary">Join the waitlist <span>&rarr;</span></button>
+          <span class="fine">One email when it launches. No newsletter.</span>
+        </div>
+        <div class="form-status"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand"><span class="mark"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></span>StudyLock</div>
+        <p>A study timer that actually locks you in. Free, local, and built for people who study on their own browser.</p>
+        <a href="app.html" class="btn btn-primary">Join the launch waitlist <span>&rarr;</span></a>
+        <div class="footer-tags"><span>Chrome</span><span>Brave</span><span>No account</span><span>Local only</span></div>
+      </div>
+      <div class="footer-col">
+        <h5>Pages</h5>
+        <a href="index.html">Home</a><a href="features.html">Features</a><a href="faq.html">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h5>More</h5>
+        <a href="app.html">App</a><a href="founder.html">Founder</a>
+      </div>
+    </div>
+    <div class="footer-wordmark">StudyLock<span class="dot"></span></div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 StudyLock</span>
+      <span>Built for people who study on their own browser.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="studylock-ui.js"></script>
 </body>
 </html>

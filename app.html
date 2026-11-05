@@ -3,350 +3,110 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>App — Coming Soon — StudyLock</title>
+<title>Join the Waitlist — StudyLock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap">
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<div class="site-header">
-<div class="wrap">
-  <nav>
-    <a href="index.html" class="brand"><span class="mark">◆</span>StudyLock</a>
-    <div class="nav-links" id="navLinks">
+<header class="site-header" id="siteHeader">
+  <div class="navbar">
+    <a href="index.html" class="brand"><span class="mark"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></span>StudyLock</a>
+    <nav class="nav-pill" id="navPill">
       <a href="index.html">Home</a>
       <a href="features.html">Features</a>
       <a href="faq.html">FAQ</a>
-      <a href="app.html" class="active">App <span class="soon-tag">Soon</span></a>
+      <a href="app.html" class="active">App</a>
       <a href="founder.html">Founder</a>
-    </div>
-    <button id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false">&#9776;</button>
-    <a href="app.html" class="btn btn-primary"><span class="wordmark">StudyL<span class="lock-o"></span>ck</span><span class="suffix">Coming Soon</span></a>
-  </nav>
-</div>
-</div>
-<script>
-  const navToggle = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
-  navToggle.addEventListener('click', () => {
-    const isOpen = navLinks.classList.toggle('open');
-    navToggle.innerHTML = isOpen ? '&#10005;' : '&#9776;';
-    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
-  navLinks.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      navToggle.innerHTML = '&#9776;';
-      navToggle.setAttribute('aria-expanded', 'false');
-    });
-  });
-</script>
-<script src="studylock-ui.js"></script>
-
-<div class="page-header">
-  <div class="wrap">
-    <span class="eyebrow">In the works</span>
-    <h1>StudyLock App</h1>
-    <p>An AI-powered study app that works alongside the blocker — think flashcards and active recall, built into the same lock-in flow.</p>
+    </nav>
+    <a href="app.html" class="btn btn-primary nav-cta">Join waitlist <span>&rarr;</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">&#9776;</button>
   </div>
-</div>
+</header>
 
-<div class="demo-block reveal">
+<section class="dark-section page-head" style="padding-bottom:60px;">
   <div class="wrap">
-    <div class="demo-block-head">
-      <h3>A preview of how studying will work</h3>
-      <p>Type your answer. The AI judges it — close counts, typos don't sink you, and you can ask for a hint.</p>
-    </div>
-    <div class="device-frame">
-      <div class="device-topbar">AI Study &middot; Chem Unit 4</div>
-      <div class="device-stage" id="gradingStage" style="min-height:220px;">
-        <div style="font-size:17px;font-weight:500;margin-bottom:16px;">What is the powerhouse of the cell?</div>
+    <span class="pill-badge"><span class="dot"></span>Launching soon</span>
+    <h1>Be there the day it opens.</h1>
+    <p>The waitlist opens the moment there is something to install. It goes straight to the founder, no newsletter, no drip campaign.</p>
+  </div>
+</section>
 
-        <div style="display:flex;gap:8px;align-items:center;">
-          <input id="answerInput" type="text" class="answer-input" placeholder="Type your answer..." readonly />
-          <div id="submitBtn" class="answer-submit">→</div>
-        </div>
-
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:10px;min-height:20px;">
-          <div class="hint-wrap">
-            <button class="hint-trigger">Ask AI for a hint</button>
-            <div id="hintBubble" class="hint-bubble">It's the organelle that makes energy for the cell.</div>
-          </div>
-          <div id="feedbackMsg" style="font-size:12.5px;font-weight:600;"></div>
-        </div>
-
-        <div id="correctPanel" class="correct-panel">
-          <div class="correct-panel-inner">
-            <span style="font-size:16px;color:#3F7A4D;flex-shrink:0;">✓</span>
-            <div>
-              <div class="correct-title">Mitochondria — the powerhouse of the cell</div>
-              <div class="correct-sub">Close enough — small spelling slip, marked correct.</div>
-            </div>
-          </div>
-        </div>
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="cta-band reveal">
+      <div class="left">
+        <span class="eyebrow">Launch waitlist</span>
+        <h2>What you get on the list.</h2>
+        <ul class="check-list">
+          <li><span class="ck">&#10003;</span>One email, at launch — nothing else</li>
+          <li><span class="ck">&#10003;</span>Early access to the app before the store listing</li>
+          <li><span class="ck">&#10003;</span>Tell me what you would actually use, and it gets built</li>
+        </ul>
       </div>
-    </div>
-  </div>
-</div>
-
-<div class="demo-block reveal">
-  <div class="wrap">
-    <div class="demo-block-head">
-      <h3>Turn notes into flashcards automatically</h3>
-      <p>Drop in a file and the AI reads it, then builds a deck around what's actually in it.</p>
-    </div>
-    <div class="device-frame" id="uploadDemoFrame">
-      <div class="device-topbar">Upload &amp; generate</div>
-      <div class="device-stage" style="min-height:auto;">
-        <div id="uploadDropzone" class="dropzone" style="position:relative;width:100%;height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
-          <div class="upload-icon-circle">↑</div>
-          <div style="font-size:13px;color:var(--ink-soft);">Drag a file here to generate flashcards</div>
-
-          <div id="uploadDragGroup" class="draggroup" style="top:-46px;">
-            <div style="width:16px;height:16px;">
-              <svg viewBox="0 0 24 24" style="width:100%;height:100%;"><path d="M4 2L4 20L9 15.5L12.5 22L15 20.5L11.5 14H18L4 2Z" fill="#1D1D1F" stroke="white" stroke-width="1"/></svg>
-            </div>
-            <div id="uploadFileChip" class="filechip">Bio_Notes.pdf</div>
-          </div>
+      <form class="waitlist-form" data-waitlist-form action="https://formspree.io/f/xwlekrgl" method="POST">
+        <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off">
+        <div class="field-row">
+          <div><label for="name5">Name</label><input type="text" id="name5" name="name" placeholder="Optional"></div>
+          <div><label for="email5">Email</label><input type="email" id="email5" name="email" placeholder="you@school.edu" required></div>
         </div>
-
-        <div style="margin-top:16px;">
-          <div id="uploadProcessing" class="upload-fadeblock" style="display:none;flex-direction:column;align-items:center;gap:8px;padding:6px 0;">
-            <div class="upload-spinner"></div>
-            <div style="font-size:13.5px;font-weight:600;">Processing Bio_Notes.pdf&hellip;</div>
-            <div class="upload-progress-track"><div id="uploadProgressFill" class="upload-progress-fill"></div></div>
-          </div>
-
-          <div id="uploadResults" class="upload-fadeblock" style="display:none;">
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
-              <span style="color:#3F7A4D;font-size:16px;">✓</span>
-              <div style="font-size:13.5px;font-weight:600;">4 topics found in Bio_Notes.pdf</div>
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-              <div class="topic-chip" id="topicChip1">Cell structure</div>
-              <div class="topic-chip" id="topicChip2">Photosynthesis</div>
-              <div class="topic-chip" id="topicChip3">Genetics basics</div>
-              <div class="topic-chip" id="topicChip4">Mitosis vs meiosis</div>
-            </div>
-          </div>
+        <label for="msg5">What would you want in the app? <span class="char-count-label"></span></label>
+        <textarea id="msg5" name="message" maxlength="500" placeholder="Quiz modes, flashcard imports, a subject you want covered — whatever you'd actually use."></textarea>
+        <div class="char-count"><span class="cur">0</span>/500</div>
+        <div class="submit-row">
+          <button type="submit" class="btn btn-primary">Join the waitlist <span>&rarr;</span></button>
+          <span class="fine">One email when it launches. No newsletter.</span>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="feedback-block">
-  <div class="wrap">
-    <div class="feedback-card reveal">
-      <span class="eyebrow">Help shape it</span>
-
-      <h3>What would you want in it?</h3>
-      <p class="feedback-sub">Quiz modes, flashcard imports, a specific subject support — whatever you'd actually use. Goes straight to the founder.</p>
-
-      <form id="feedbackForm" class="feedback-form" action="https://formspree.io/f/xwlekrgl" method="POST">
-        <div class="feedback-row">
-          <input type="text" name="name" placeholder="Name (optional)" />
-          <input type="email" name="email" placeholder="Email (optional, if you want a reply)" />
-        </div>
-        <textarea name="message" placeholder="What would you like to see in the app?" required></textarea>
-        <button type="submit" class="btn btn-primary" id="feedbackSubmit">Send feedback</button>
+        <div class="form-status"></div>
       </form>
-
-      <p class="feedback-status" id="feedbackStatus"></p>
     </div>
   </div>
-</div>
+</section>
 
-<script>
-  const feedbackForm = document.getElementById('feedbackForm');
-  const feedbackStatus = document.getElementById('feedbackStatus');
-  const feedbackSubmit = document.getElementById('feedbackSubmit');
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="quick-grid">
+      <a class="quick-card reveal" href="features.html">
+        <div class="qtop"><div class="qicon">&#9201;</div><span class="qarrow">&#8599;</span></div>
+        <span class="qlabel">Features</span>
+        <strong>What is actually in the popup</strong>
+        <p>The timer, the task list, the lock — with a live preview of each.</p>
+      </a>
+      <a class="quick-card reveal" href="faq.html">
+        <div class="qtop"><div class="qicon">?</div><span class="qarrow">&#8599;</span></div>
+        <span class="qlabel">FAQ</span>
+        <strong>The eight questions people ask</strong>
+        <p>Permissions, Brave support, what happens if you close the browser.</p>
+      </a>
+      <a class="quick-card reveal" href="founder.html">
+        <div class="qtop"><div class="qicon">&#9679;</div><span class="qarrow">&#8599;</span></div>
+        <span class="qlabel">Founder</span>
+        <strong>Why this exists at all</strong>
+        <p>A note from the student who kept losing twenty minutes to YouTube.</p>
+      </a>
+    </div>
+  </div>
+</section>
 
-  feedbackForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    feedbackSubmit.disabled = true;
-    feedbackSubmit.textContent = 'Sending...';
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand"><span class="mark"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></span>StudyLock</div>
+        <p>A study timer that actually locks you in. Free, local, and built for people who study on their own browser.</p>
+        <a href="app.html" class="btn btn-primary">Join the launch waitlist <span>&rarr;</span></a>
+        <div class="footer-tags"><span>Chrome</span><span>Brave</span><span>No account</span><span>Local only</span></div>
+      </div>
+      <div class="footer-col"><h5>Pages</h5><a href="index.html">Home</a><a href="features.html">Features</a><a href="faq.html">FAQ</a></div>
+      <div class="footer-col"><h5>More</h5><a href="app.html">App</a><a href="founder.html">Founder</a></div>
+    </div>
+    <div class="footer-wordmark">StudyLock<span class="dot"></span></div>
+    <div class="footer-bottom"><span>&copy; 2026 StudyLock</span><span>Built for people who study on their own browser.</span></div>
+  </div>
+</footer>
 
-    try {
-      const res = await fetch(feedbackForm.action, {
-        method: 'POST',
-        body: new FormData(feedbackForm),
-        headers: { 'Accept': 'application/json' }
-      });
-
-      if (res.ok) {
-        feedbackForm.reset();
-        feedbackForm.style.display = 'none';
-        feedbackStatus.textContent = "Thanks — that's been sent.";
-      } else {
-        feedbackStatus.textContent = 'Something went wrong. Try again in a moment.';
-        feedbackSubmit.disabled = false;
-        feedbackSubmit.textContent = 'Send feedback';
-      }
-    } catch (err) {
-      feedbackStatus.textContent = 'Something went wrong. Try again in a moment.';
-      feedbackSubmit.disabled = false;
-      feedbackSubmit.textContent = 'Send feedback';
-    }
-  });
-</script>
-
-<script>
-  function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
-
-  async function typeInto(el, text, speed) {
-    el.value = '';
-    for (let i = 0; i <= text.length; i++) {
-      el.value = text.slice(0, i);
-      await sleep(speed);
-    }
-  }
-
-  async function press(el) {
-    el.style.transform = 'scale(0.88)';
-    await sleep(140);
-    el.style.transform = 'scale(1)';
-  }
-
-  async function runGradingDemo() {
-    const input = document.getElementById('answerInput');
-    const submitBtn = document.getElementById('submitBtn');
-    const feedback = document.getElementById('feedbackMsg');
-    const hintBubble = document.getElementById('hintBubble');
-    const correctPanel = document.getElementById('correctPanel');
-
-    await sleep(500);
-
-    await typeInto(input, 'Nucleus', 65);
-    await sleep(400);
-    await press(submitBtn);
-    input.classList.add('shake');
-    input.style.borderColor = '#C0504D';
-    feedback.style.color = '#A33A38';
-    feedback.textContent = 'Not quite';
-    await sleep(500);
-    input.classList.remove('shake');
-    await sleep(900);
-
-    hintBubble.classList.add('show');
-    await sleep(1800);
-    hintBubble.classList.remove('show');
-    await sleep(400);
-
-    input.style.borderColor = '';
-    feedback.textContent = '';
-    await typeInto(input, 'mitocondria', 70);
-    await sleep(400);
-    await press(submitBtn);
-    input.style.borderColor = '#4C8B5B';
-    feedback.style.color = '#3F7A4D';
-    feedback.textContent = 'Correct';
-    await sleep(300);
-    correctPanel.classList.add('show');
-  }
-
-  const gradingStage = document.getElementById('gradingStage');
-  let gradingPlayed = false;
-  const gradingObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting && !gradingPlayed) {
-        gradingPlayed = true;
-        runGradingDemo();
-        gradingObserver.unobserve(gradingStage);
-      }
-    });
-  }, { threshold: 0.4 });
-  gradingObserver.observe(gradingStage);
-</script>
-
-<script>
-  async function crossfadeUpload(from, to, toDisplay) {
-    if (from) {
-      from.classList.remove('show');
-      await sleep(300);
-      from.style.display = 'none';
-    }
-    to.style.display = toDisplay;
-    void to.offsetWidth;
-    to.classList.add('show');
-    await sleep(300);
-  }
-
-  async function runUploadDemo() {
-    const zone = document.getElementById('uploadDropzone');
-    const group = document.getElementById('uploadDragGroup');
-    const chip = document.getElementById('uploadFileChip');
-    const proc = document.getElementById('uploadProcessing');
-    const res = document.getElementById('uploadResults');
-    const fill = document.getElementById('uploadProgressFill');
-    const chips = ['topicChip1', 'topicChip2', 'topicChip3', 'topicChip4'].map((id) => document.getElementById(id));
-
-    await sleep(700);
-    group.style.top = '40px';
-    await sleep(700);
-    zone.classList.add('hover');
-    chip.style.transform = 'scale(0.94)';
-    await sleep(180);
-    chip.style.transform = 'scale(1)';
-    await sleep(400);
-    group.style.opacity = '0';
-    zone.classList.remove('hover');
-    await sleep(600);
-
-    await crossfadeUpload(null, proc, 'flex');
-    await sleep(80);
-    fill.style.transition = 'width 1.4s linear';
-    fill.style.width = '100%';
-    await sleep(1600);
-
-    await crossfadeUpload(proc, res, 'block');
-    for (const c of chips) {
-      c.classList.add('show');
-      await sleep(160);
-    }
-  }
-
-  const uploadStage = document.getElementById('uploadDemoFrame');
-  let uploadPlayed = false;
-
-  function playUploadDemoOnce() {
-    if (uploadPlayed) return;
-    uploadPlayed = true;
-    runUploadDemo();
-    uploadObserver.disconnect();
-  }
-
-  const uploadObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) playUploadDemoOnce();
-    });
-  }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
-  uploadObserver.observe(uploadStage);
-
-  // Fallback: some browsers/extensions can suppress IntersectionObserver
-  // callbacks (or the card can load already on-screen in odd viewport
-  // sizes). If the card is visible on scroll/resize but the observer
-  // never fired, trigger the demo directly instead of leaving it stuck.
-  function uploadStageIsVisible() {
-    const rect = uploadStage.getBoundingClientRect();
-    return rect.top < window.innerHeight * 0.9 && rect.bottom > 0;
-  }
-  ['scroll', 'resize'].forEach((evt) => {
-    window.addEventListener(evt, () => {
-      if (!uploadPlayed && uploadStageIsVisible()) playUploadDemoOnce();
-    }, { passive: true });
-  });
-  // Also check once on load in case the card is already in view.
-  window.addEventListener('load', () => {
-    if (!uploadPlayed && uploadStageIsVisible()) playUploadDemoOnce();
-  });
-</script>
-
-<div class="wrap">
-  <footer>
-    <div class="brand"><span class="mark">◆</span>StudyLock</div>
-    <span>Built for people who study on their own browser.</span>
-  </footer>
-</div>
-
+<script src="studylock-ui.js"></script>
 </body>
 </html>

@@ -11,71 +11,113 @@
 </head>
 <body>
 
-<div class="site-header">
-<div class="wrap">
-  <nav>
-    <a href="index.html" class="brand"><span class="mark">◆</span>StudyLock</a>
-    <div class="nav-links" id="navLinks">
+<header class="site-header" id="siteHeader">
+  <div class="navbar">
+    <a href="index.html" class="brand"><span class="mark"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></span>StudyLock</a>
+    <nav class="nav-pill" id="navPill">
       <a href="index.html">Home</a>
       <a href="features.html">Features</a>
       <a href="faq.html">FAQ</a>
-      <a href="app.html">App <span class="soon-tag">Soon</span></a>
+      <a href="app.html">App</a>
       <a href="founder.html" class="active">Founder</a>
-    </div>
-    <button id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false">&#9776;</button>
-    <a href="app.html" class="btn btn-primary"><span class="wordmark">StudyL<span class="lock-o"></span>ck</span><span class="suffix">Coming Soon</span></a>
-  </nav>
-</div>
-</div>
-<script>
-  const navToggle = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
-  navToggle.addEventListener('click', () => {
-    const isOpen = navLinks.classList.toggle('open');
-    navToggle.innerHTML = isOpen ? '&#10005;' : '&#9776;';
-    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
-  navLinks.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      navToggle.innerHTML = '&#9776;';
-      navToggle.setAttribute('aria-expanded', 'false');
-    });
-  });
-</script>
-<script src="studylock-ui.js"></script>
+    </nav>
+    <a href="app.html" class="btn btn-primary nav-cta">Join waitlist <span>&rarr;</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
 
-<div class="page-header">
+<section class="dark-section page-head">
   <div class="wrap">
-    <span class="eyebrow">Who built this</span>
-    <h1>Founder</h1>
-  </div>
-</div>
-
-<div class="founder-block">
-  <div class="founder-card reveal">
-    <div class="founder-avatar"><img src="founder.jpg" alt="Nilkanth" /></div>
-    <h2>Nilkanth</h2>
-    <div class="founder-role">Founder, StudyLock</div>
-
-    <p class="bio">I'm a high school student who builds things — StudyLock started as a way to solve a problem I kept running into myself: opening a new tab to look something up for homework, and somehow ending up on YouTube twenty minutes later.</p>
-    <p class="bio">I like building tools that are simple enough to actually stick with, rather than apps with more settings than substance.</p>
-
-    <div class="founder-divider"></div>
-
-    <div class="founder-why">
-      <h4>Why I built this</h4>
-      <p class="bio">Every focus app I tried either wasn't strict enough to matter, or was so complicated I stopped using it within a week. StudyLock is my attempt at the smallest version that actually works — a timer, a task list, and a lock that holds until time's up.</p>
+    <span class="pill-badge"><span class="dot"></span>The founder</span>
+    <h1>One student, building in the open.</h1>
+    <p>No team, no office — just someone who kept losing focus and decided to fix it.</p>
+    <div class="head-ctas">
+      <a href="faq.html" class="btn btn-outline on-dark">Read the FAQ</a>
     </div>
   </div>
-</div>
+</section>
 
-<div class="wrap">
-  <footer>
-    <div class="brand"><span class="mark">◆</span>StudyLock</div>
-    <span>Built for people who study on their own browser.</span>
-  </footer>
-</div>
+<section class="section">
+  <div class="wrap">
+    <div class="founder-layout">
+      <div class="founder-photo-card reveal">
+        <div class="photo-frame"><img src="assets/founder-photo.jpg" alt="Nilkanth standing before a snow-capped glacier valley."></div>
+        <div class="who">
+          <div><h3>Nilkanth</h3><span class="role">Founder, StudyLock</span></div>
+          <div class="peak">&#9650;</div>
+        </div>
+      </div>
 
+      <div class="founder-copy reveal">
+        <span class="eyebrow">A note from him</span>
+        <h1>Built for people who study in their own browser.</h1>
+        <p class="lede">I'm a high school student who builds things — StudyLock started as a way to solve a problem I kept running into myself: opening a new tab to look something up for homework, and somehow ending up on YouTube twenty minutes later.</p>
+        <p class="lede">I like building tools that are simple enough to actually stick with, rather than apps with more settings than substance.</p>
+
+        <div class="founder-why">
+          <span class="eyebrow">Why I built this</span>
+          <p>Every focus app I tried either wasn't strict enough to matter, or was so complicated I stopped using it within a week. StudyLock is my attempt at the smallest version that actually works — a timer, a task list, and a lock that holds until time's up.</p>
+        </div>
+
+        <div class="founder-facts">
+          <div class="f"><div class="fi">&#36;</div><strong>Free, permanently</strong><span>No account, no trial, no paywall on the current features.</span></div>
+          <div class="f"><div class="fi">&#9729;</div><strong>Local by design</strong><span>Tasks, settings and session state live in your browser only.</span></div>
+          <div class="f"><div class="fi">&#9673;</div><strong>Chrome &amp; Brave</strong><span>Same engine, same install, same behaviour on both.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="cta-band reveal">
+      <div class="left">
+        <span class="eyebrow">Launching soon</span>
+        <h2>Your next study session starts in one click.</h2>
+        <p>Free, local, and ready in under a minute. Leave your email and you'll get one message the day it becomes installable — nothing else.</p>
+        <ul class="check-list">
+          <li><span class="ck">&#10003;</span>Free on Chrome and Brave</li>
+          <li><span class="ck">&#10003;</span>No account, no server</li>
+          <li><span class="ck">&#10003;</span>Your data stays in the browser</li>
+        </ul>
+      </div>
+      <form class="waitlist-form" data-waitlist-form action="https://formspree.io/f/xwlekrgl" method="POST">
+        <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off">
+        <div class="field-row">
+          <div><label for="name4">Name</label><input type="text" id="name4" name="name" placeholder="Optional"></div>
+          <div><label for="email4">Email</label><input type="email" id="email4" name="email" placeholder="you@school.edu" required></div>
+        </div>
+        <label for="msg4">What would you want in the app? <span class="char-count-label"></span></label>
+        <textarea id="msg4" name="message" maxlength="500" placeholder="Quiz modes, flashcard imports, a subject you want covered — whatever you'd actually use."></textarea>
+        <div class="char-count"><span class="cur">0</span>/500</div>
+        <div class="submit-row">
+          <button type="submit" class="btn btn-primary">Join the waitlist <span>&rarr;</span></button>
+          <span class="fine">One email when it launches. No newsletter.</span>
+        </div>
+        <div class="form-status"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand"><span class="mark"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></span>StudyLock</div>
+        <p>A study timer that actually locks you in. Free, local, and built for people who study on their own browser.</p>
+        <a href="app.html" class="btn btn-primary">Join the launch waitlist <span>&rarr;</span></a>
+        <div class="footer-tags"><span>Chrome</span><span>Brave</span><span>No account</span><span>Local only</span></div>
+      </div>
+      <div class="footer-col"><h5>Pages</h5><a href="index.html">Home</a><a href="features.html">Features</a><a href="faq.html">FAQ</a></div>
+      <div class="footer-col"><h5>More</h5><a href="app.html">App</a><a href="founder.html">Founder</a></div>
+    </div>
+    <div class="footer-wordmark">StudyLock<span class="dot"></span></div>
+    <div class="footer-bottom"><span>&copy; 2026 StudyLock</span><span>Built for people who study on their own browser.</span></div>
+  </div>
+</footer>
+
+<script src="studylock-ui.js"></script>
 </body>
 </html>

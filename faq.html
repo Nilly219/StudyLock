@@ -11,116 +11,132 @@
 </head>
 <body>
 
-<div class="site-header">
-<div class="wrap">
-  <nav>
-    <a href="index.html" class="brand"><span class="mark">◆</span>StudyLock</a>
-    <div class="nav-links" id="navLinks">
+<header class="site-header" id="siteHeader">
+  <div class="navbar">
+    <a href="index.html" class="brand"><span class="mark"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></span>StudyLock</a>
+    <nav class="nav-pill" id="navPill">
       <a href="index.html">Home</a>
       <a href="features.html">Features</a>
       <a href="faq.html" class="active">FAQ</a>
-      <a href="app.html">App <span class="soon-tag">Soon</span></a>
+      <a href="app.html">App</a>
       <a href="founder.html">Founder</a>
-    </div>
-    <button id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false">&#9776;</button>
-    <a href="app.html" class="btn btn-primary"><span class="wordmark">StudyL<span class="lock-o"></span>ck</span><span class="suffix">Coming Soon</span></a>
-  </nav>
-</div>
-</div>
-<script>
-  const navToggle = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
-  navToggle.addEventListener('click', () => {
-    const isOpen = navLinks.classList.toggle('open');
-    navToggle.innerHTML = isOpen ? '&#10005;' : '&#9776;';
-    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
-  navLinks.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      navToggle.innerHTML = '&#9776;';
-      navToggle.setAttribute('aria-expanded', 'false');
-    });
-  });
-</script>
-<script src="studylock-ui.js"></script>
+    </nav>
+    <a href="app.html" class="btn btn-primary nav-cta">Join waitlist <span>&rarr;</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
 
-<div class="page-header">
+<section class="dark-section page-head">
   <div class="wrap">
-    <span class="eyebrow">Questions</span>
-    <h1>Frequently asked questions</h1>
-    <p>Everything people usually ask before installing.</p>
+    <span class="pill-badge"><span class="dot"></span>Before you install</span>
+    <h1>The questions people actually ask.</h1>
+    <p>Short answers, no marketing. If something is still unclear, the waitlist form below reaches the founder directly.</p>
+    <div class="head-ctas">
+      <a href="features.html" class="btn btn-outline on-dark">See the features</a>
+    </div>
   </div>
-</div>
+</section>
 
-<div class="wrap">
-  <div class="faq-list" id="faqList">
+<section class="section">
+  <div class="wrap">
+    <div class="faq-layout">
+      <div class="faq-side reveal">
+        <span class="eyebrow">Questions</span>
+        <h2>Frequently<br>asked.</h2>
+        <p>Everything people usually ask before installing.</p>
+        <div class="note-card">
+          <p>Still unsure about something? The founder answers these himself.</p>
+          <a href="founder.html">Read his note &rarr;</a>
+        </div>
+      </div>
 
-    <div class="faq-item open reveal">
-      <button class="faq-q">Is StudyLock actually free?<span class="chevron">+</span></button>
-      <div class="faq-a"><div>Yes — StudyLock is free with no account required. There's no trial period or hidden paywall for the current features.</div></div>
+      <div class="faq-list" id="faqList">
+        <div class="faq-item open" data-faq>
+          <div class="faq-q"><span class="qnum">01</span><strong>Is StudyLock actually free?</strong><span class="faq-toggle">&minus;</span></div>
+          <div class="faq-a"><div class="faq-a-inner">Yes — StudyLock is free with no account required. There is no trial period or hidden paywall for the current features.</div></div>
+        </div>
+        <div class="faq-item" data-faq>
+          <div class="faq-q"><span class="qnum">02</span><strong>Does it work on Brave, or only Chrome?</strong><span class="faq-toggle">+</span></div>
+          <div class="faq-a"><div class="faq-a-inner">Both. StudyLock is built on the standard Chromium extension APIs, so it installs and runs the same way on Chrome and Brave.</div></div>
+        </div>
+        <div class="faq-item" data-faq>
+          <div class="faq-q"><span class="qnum">03</span><strong>Does StudyLock collect or send my data anywhere?</strong><span class="faq-toggle">+</span></div>
+          <div class="faq-a"><div class="faq-a-inner">No. Sessions, tasks, and blocked-site lists are stored locally in your browser only. Nothing is synced to a server.</div></div>
+        </div>
+        <div class="faq-item" data-faq>
+          <div class="faq-q"><span class="qnum">04</span><strong>Can I choose which sites get blocked?</strong><span class="faq-toggle">+</span></div>
+          <div class="faq-a"><div class="faq-a-inner">Yes — you pick the exact list. Nothing is blocked by default, and you can edit the list at any time between sessions.</div></div>
+        </div>
+        <div class="faq-item" data-faq>
+          <div class="faq-q"><span class="qnum">05</span><strong>What happens if I close my browser mid-session?</strong><span class="faq-toggle">+</span></div>
+          <div class="faq-a"><div class="faq-a-inner">Your session state is saved locally, so reopening the browser picks the timer and lock list back up where you left off.</div></div>
+        </div>
+        <div class="faq-item" data-faq>
+          <div class="faq-q"><span class="qnum">06</span><strong>Can I end a session early if I need to?</strong><span class="faq-toggle">+</span></div>
+          <div class="faq-a"><div class="faq-a-inner">Yes. There's an End button in the popup for whenever a session genuinely needs to stop early — no penalty, no streak lost.</div></div>
+        </div>
+        <div class="faq-item" data-faq>
+          <div class="faq-q"><span class="qnum">07</span><strong>Will it slow down my browser?</strong><span class="faq-toggle">+</span></div>
+          <div class="faq-a"><div class="faq-a-inner">No. Outside an active session the extension is idle, and blocking is handled by the browser's own request rules, not a background script.</div></div>
+        </div>
+        <div class="faq-item" data-faq>
+          <div class="faq-q"><span class="qnum">08</span><strong>Is there a mobile version?</strong><span class="faq-toggle">+</span></div>
+          <div class="faq-a"><div class="faq-a-inner">Not yet — StudyLock currently ships as a Chrome and Brave desktop extension only. Mobile isn't ruled out, just not built.</div></div>
+        </div>
+      </div>
     </div>
-
-    <div class="faq-item reveal">
-      <button class="faq-q">Does it work on Brave, or only Chrome?<span class="chevron">+</span></button>
-      <div class="faq-a"><div>Both. Brave is built on the same engine as Chrome, so StudyLock installs and runs exactly the same way on either browser.</div></div>
-    </div>
-
-    <div class="faq-item reveal">
-      <button class="faq-q">Does StudyLock collect or send my data anywhere?<span class="chevron">+</span></button>
-      <div class="faq-a"><div>No. Everything — your tasks, your blocked-site list, your session state — is stored locally in your browser. Nothing is sent to a server.</div></div>
-    </div>
-
-    <div class="faq-item reveal">
-      <button class="faq-q">Can I choose which sites get blocked?<span class="chevron">+</span></button>
-      <div class="faq-a"><div>Yes. A default list covers the usual suspects (YouTube, Instagram, TikTok, X, Reddit), but you can add or remove any site from the Options page.</div></div>
-    </div>
-
-    <div class="faq-item reveal">
-      <button class="faq-q">What happens if I close my browser mid-session?<span class="chevron">+</span></button>
-      <div class="faq-a"><div>Your session keeps running in the background. When you reopen your browser, blocked sites will still redirect until the timer's original end time passes.</div></div>
-    </div>
-
-    <div class="faq-item reveal">
-      <button class="faq-q">Can I end a session early if I need to?<span class="chevron">+</span></button>
-      <div class="faq-a"><div>Yes, there's an "End session" button in the popup at any time — StudyLock isn't trying to lock you out against your will, just remove the temptation.</div></div>
-    </div>
-
-    <div class="faq-item reveal">
-      <button class="faq-q">Will it slow down my browser?<span class="chevron">+</span></button>
-      <div class="faq-a"><div>No. It uses Chrome's built-in blocking APIs rather than scanning pages itself, so there's no noticeable impact on browsing speed.</div></div>
-    </div>
-
-    <div class="faq-item reveal">
-      <button class="faq-q">Is there a mobile version?<span class="chevron">+</span></button>
-      <div class="faq-a"><div>Not yet — StudyLock is currently a desktop browser extension only. Mobile isn't ruled out for the future, but it isn't in progress right now.</div></div>
-    </div>
-
   </div>
-</div>
+</section>
 
-<div class="wrap">
-  <div class="cta-band reveal">
-    <h2>Still have a question?</h2>
-    <p>Read more about why StudyLock exists on the Founder page.</p>
-    <a href="founder.html" class="btn btn-primary">Meet the founder</a>
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="cta-band reveal">
+      <div class="left">
+        <span class="eyebrow">Launching soon</span>
+        <h2>Your next study session starts in one click.</h2>
+        <p>Free, local, and ready in under a minute. Leave your email and you'll get one message the day it becomes installable — nothing else.</p>
+        <ul class="check-list">
+          <li><span class="ck">&#10003;</span>Free on Chrome and Brave</li>
+          <li><span class="ck">&#10003;</span>No account, no server</li>
+          <li><span class="ck">&#10003;</span>Your data stays in the browser</li>
+        </ul>
+      </div>
+      <form class="waitlist-form" data-waitlist-form action="https://formspree.io/f/xwlekrgl" method="POST">
+        <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off">
+        <div class="field-row">
+          <div><label for="name3">Name</label><input type="text" id="name3" name="name" placeholder="Optional"></div>
+          <div><label for="email3">Email</label><input type="email" id="email3" name="email" placeholder="you@school.edu" required></div>
+        </div>
+        <label for="msg3">What would you want in the app? <span class="char-count-label"></span></label>
+        <textarea id="msg3" name="message" maxlength="500" placeholder="Quiz modes, flashcard imports, a subject you want covered — whatever you'd actually use."></textarea>
+        <div class="char-count"><span class="cur">0</span>/500</div>
+        <div class="submit-row">
+          <button type="submit" class="btn btn-primary">Join the waitlist <span>&rarr;</span></button>
+          <span class="fine">One email when it launches. No newsletter.</span>
+        </div>
+        <div class="form-status"></div>
+      </form>
+    </div>
   </div>
-</div>
+</section>
 
-<div class="wrap">
-  <footer>
-    <div class="brand"><span class="mark">◆</span>StudyLock</div>
-    <span>Built for people who study on their own browser.</span>
-  </footer>
-</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand"><span class="mark"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></span>StudyLock</div>
+        <p>A study timer that actually locks you in. Free, local, and built for people who study on their own browser.</p>
+        <a href="app.html" class="btn btn-primary">Join the launch waitlist <span>&rarr;</span></a>
+        <div class="footer-tags"><span>Chrome</span><span>Brave</span><span>No account</span><span>Local only</span></div>
+      </div>
+      <div class="footer-col"><h5>Pages</h5><a href="index.html">Home</a><a href="features.html">Features</a><a href="faq.html">FAQ</a></div>
+      <div class="footer-col"><h5>More</h5><a href="app.html">App</a><a href="founder.html">Founder</a></div>
+    </div>
+    <div class="footer-wordmark">StudyLock<span class="dot"></span></div>
+    <div class="footer-bottom"><span>&copy; 2026 StudyLock</span><span>Built for people who study on their own browser.</span></div>
+  </div>
+</footer>
 
-<script>
-  document.querySelectorAll('.faq-q').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      btn.parentElement.classList.toggle('open');
-    });
-  });
-</script>
-
+<script src="studylock-ui.js"></script>
 </body>
 </html>
