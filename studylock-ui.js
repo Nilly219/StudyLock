@@ -128,9 +128,19 @@
     if (!wrap || !laptop) return;
 
     const TURN_LABELS = ['01 FLEXIBLE TIMER', '02 BUILT-IN TASKS', '03 REAL SITE BLOCKING'];
-    const TILT_BASE = 8; // resting rotateX
+    // Negative rotateX tips the screen toward the viewer and drops the
+    // camera above the deck, so the keyboard reads as a top-down/overhead
+    // product shot rather than a view up from underneath it.
+    const TILT_BASE = -30;
     let currentTurn = -1;
     let ticking = false;
+
+    function laptopScale() {
+      const w = window.innerWidth;
+      if (w <= 640) return 0.56;
+      if (w <= 980) return 0.72;
+      return 1;
+    }
 
     function setTurn(turn) {
       if (turn === currentTurn) return;
@@ -172,7 +182,8 @@
       }
 
       const rotY = seg * 360 + spin;
-      laptop.style.transform = `rotateX(${TILT_BASE}deg) rotateY(${(rotY % 360) < 180 ? rotY % 360 : (rotY % 360) - 360}deg)`;
+      const scale = laptopScale();
+      laptop.style.transform = `scale(${scale}) rotateX(${TILT_BASE}deg) rotateY(${(rotY % 360) < 180 ? rotY % 360 : (rotY % 360) - 360}deg)`;
 
       setTurn(seg);
 
