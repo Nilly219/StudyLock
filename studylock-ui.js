@@ -96,13 +96,29 @@
   function buildKeyboard() {
     const kb = document.getElementById('lpKeyboard');
     if (!kb) return;
-    const rows = 4;
-    const cols = 14;
-    for (let i = 0; i < rows * cols; i++) {
-      const k = document.createElement('div');
-      k.className = 'lp-key';
-      kb.appendChild(k);
-    }
+    // Each row is a list of relative key widths (a plain "1" is a normal
+    // key; larger numbers are the wide special keys — tab, caps, enter,
+    // shift, spacebar — so the deck reads as a real keyboard layout
+    // rather than a uniform grid of identical squares.
+    const rows = [
+      { keys: Array(13).fill(1), accents: [] }, // function row
+      { keys: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2], accents: [12] }, // number row + backspace
+      { keys: [1.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], accents: [0] }, // tab row
+      { keys: [1.75, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2.25], accents: [0, 11] }, // caps row + enter
+      { keys: [2.25, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2.25], accents: [0, 10] }, // shift row
+      { keys: [1.2, 1.2, 6, 1.2, 1.2], accents: [2] }, // ctrl / alt / space / alt / ctrl
+    ];
+    rows.forEach((row) => {
+      const rowEl = document.createElement('div');
+      rowEl.className = 'lp-krow';
+      row.keys.forEach((w, i) => {
+        const k = document.createElement('div');
+        k.className = 'lp-key' + (row.accents.includes(i) ? ' accent' : '');
+        k.style.setProperty('--w', w);
+        rowEl.appendChild(k);
+      });
+      kb.appendChild(rowEl);
+    });
   }
 
   // ---------------------------------------------------------------------
